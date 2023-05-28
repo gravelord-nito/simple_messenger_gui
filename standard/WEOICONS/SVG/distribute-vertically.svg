@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="24px" height="24px" viewBox="0 0 24 24" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: Sketch 44.1 (41455) - http://www.bohemiancoding.com/sketch -->
+    <title>Bold/SVG/distribute-vertically</title>
+    <desc>Created with Sketch.</desc>
+    <defs></defs>
+    <g id="Bold-Outline" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="distribute-vertically" fill-rule="nonzero" fill="#000000">
+            <path d="M3,21 C2.44771525,21 2,20.5522847 2,20 C2,19.4477153 2.44771525,19 3,19 L21,19 C21.5522847,19 22,19.4477153 22,20 C22,20.5522847 21.5522847,21 21,21 L3,21 Z M3,5 C2.44771525,5 2,4.55228475 2,4 C2,3.44771525 2.44771525,3 3,3 L21,3 C21.5522847,3 22,3.44771525 22,4 C22,4.55228475 21.5522847,5 21,5 L3,5 Z M6,8.5 L18,8.5 C19.1045695,8.5 20,9.3954305 20,10.5 L20,13.5 C20,14.6045695 19.1045695,15.5 18,15.5 L6,15.5 C4.8954305,15.5 4,14.6045695 4,13.5 L4,10.5 C4,9.3954305 4.8954305,8.5 6,8.5 Z M6,10.5 L6,13.5 L18,13.5 L18,10.5 L6,10.5 Z" id="Combined-Shape"></path>
+        </g>
+    </g>
+</svg>

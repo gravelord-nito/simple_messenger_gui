@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="24px" height="24px" viewBox="0 0 24 24" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: Sketch 44.1 (41455) - http://www.bohemiancoding.com/sketch -->
+    <title>Bold/SVG/monitor</title>
+    <desc>Created with Sketch.</desc>
+    <defs></defs>
+    <g id="Bold-Outline" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="monitor" fill-rule="nonzero" fill="#000000">
+            <path d="M9.5,20 L9.5,18 L5,18 C2.790861,18 1,16.209139 1,14 L1,6 C1,3.790861 2.790861,2 5,2 L19,2 C21.209139,2 23,3.790861 23,6 L23,14 C23,16.209139 21.209139,18 19,18 L14.5,18 L14.5,20 L17,20 C17.5522847,20 18,20.4477153 18,21 C18,21.5522847 17.5522847,22 17,22 L7,22 C6.44771525,22 6,21.5522847 6,21 C6,20.4477153 6.44771525,20 7,20 L9.5,20 Z M5,4 C3.8954305,4 3,4.8954305 3,6 L3,14 C3,15.1045695 3.8954305,16 5,16 L19,16 C20.1045695,16 21,15.1045695 21,14 L21,6 C21,4.8954305 20.1045695,4 19,4 L5,4 Z M11.5,20 L12.5,20 L12.5,18 L11.5,18 L11.5,20 Z" id="shape"></path>
+        </g>
+    </g>
+</svg>

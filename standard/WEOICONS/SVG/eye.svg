@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="24px" height="24px" viewBox="0 0 24 24" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: Sketch 44.1 (41455) - http://www.bohemiancoding.com/sketch -->
+    <title>Bold/SVG/eye</title>
+    <desc>Created with Sketch.</desc>
+    <defs></defs>
+    <g id="Bold-Outline" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="eye" fill-rule="nonzero" fill="#000000">
+            <path d="M12,21 C6.49291808,21 1,16.0675428 1,12 C1,7.9324572 6.49291808,3 12,3 C17.5070819,3 23,7.9324572 23,12 C23,16.0675428 17.5070819,21 12,21 Z M12,19 C16.44763,19 21,14.9121236 21,12 C21,9.08787639 16.44763,5 12,5 C7.55237,5 3,9.08787639 3,12 C3,14.9121236 7.55237,19 12,19 Z M12,16.5 C9.51471863,16.5 7.5,14.4852814 7.5,12 C7.5,9.51471863 9.51471863,7.5 12,7.5 C14.4852814,7.5 16.5,9.51471863 16.5,12 C16.5,14.4852814 14.4852814,16.5 12,16.5 Z M12,14.5 C13.3807119,14.5 14.5,13.3807119 14.5,12 C14.5,10.6192881 13.3807119,9.5 12,9.5 C10.6192881,9.5 9.5,10.6192881 9.5,12 C9.5,13.3807119 10.6192881,14.5 12,14.5 Z" id="shape"></path>
+        </g>
+    </g>
+</svg>

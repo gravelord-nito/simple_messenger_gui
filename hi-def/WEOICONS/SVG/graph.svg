@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="24px" height="24px" viewBox="0 0 24 24" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: Sketch 44.1 (41455) - http://www.bohemiancoding.com/sketch -->
+    <title>Bold/SVG/graph</title>
+    <desc>Created with Sketch.</desc>
+    <defs></defs>
+    <g id="Bold-Outline" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="graph" fill-rule="nonzero" fill="#000000">
+            <path d="M8,11 C8,10.4477153 7.55228475,10 7,10 L5,10 C4.44771525,10 4,10.4477153 4,11 L4,20 L8,20 L8,11 Z M15,22 L9,22 L3,22 C2.44771525,22 2,21.5522847 2,21 L2,11 C2,9.34314575 3.34314575,8 5,8 L7,8 C7.35063542,8 7.68722107,8.06015422 8,8.17070571 L8,5 C8,3.34314575 9.34314575,2 11,2 L13,2 C14.6568542,2 16,3.34314575 16,5 L16,12.1707057 C16.3127789,12.0601542 16.6493646,12 17,12 L19,12 C20.6568542,12 22,13.3431458 22,15 L22,21 C22,21.5522847 21.5522847,22 21,22 L15,22 Z M14,20 L14,5 C14,4.44771525 13.5522847,4 13,4 L11,4 C10.4477153,4 10,4.44771525 10,5 L10,20 L14,20 Z M20,15 C20,14.4477153 19.5522847,14 19,14 L17,14 C16.4477153,14 16,14.4477153 16,15 L16,20 L20,20 L20,15 Z" id="shape"></path>
+        </g>
+    </g>
+</svg>

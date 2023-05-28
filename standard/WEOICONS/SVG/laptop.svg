@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="24px" height="24px" viewBox="0 0 24 24" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: Sketch 44.1 (41455) - http://www.bohemiancoding.com/sketch -->
+    <title>Bold/SVG/laptop</title>
+    <desc>Created with Sketch.</desc>
+    <defs></defs>
+    <g id="Bold-Outline" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="laptop" fill-rule="nonzero" fill="#000000">
+            <path d="M20.5,15 L20.5,7 C20.5,5.8954305 19.6045695,5 18.5,5 L5.5,5 C4.3954305,5 3.5,5.8954305 3.5,7 L3.5,15 L20.5,15 Z M1.5,15.4013466 L1.5,7 C1.5,4.790861 3.290861,3 5.5,3 L18.5,3 C20.709139,3 22.5,4.790861 22.5,7 L22.5,15.4013466 C23.3967021,15.9200607 24,16.8895765 24,18 C24,19.6568542 22.6568542,21 21,21 L3,21 C1.34314575,21 -1.66533454e-16,19.6568542 0,18 C1.11610702e-16,16.8895765 0.603297945,15.9200607 1.5,15.4013466 Z M21,17 L14.3789734,17 C12.9895404,18.1045944 11.0102712,18.1045917 9.62089126,17 L3,17 C2.44771525,17 2,17.4477153 2,18 C2,18.5522847 2.44771525,19 3,19 L21,19 C21.5522847,19 22,18.5522847 22,18 C22,17.4477153 21.5522847,17 21,17 Z" id="shape"></path>
+        </g>
+    </g>
+</svg>

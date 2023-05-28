@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="24px" height="24px" viewBox="0 0 24 24" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: Sketch 44.1 (41455) - http://www.bohemiancoding.com/sketch -->
+    <title>Bold/SVG/slice</title>
+    <desc>Created with Sketch.</desc>
+    <defs></defs>
+    <g id="Bold-Outline" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="slice" fill-rule="nonzero" fill="#000000">
+            <path d="M8,11 L8,3 C8,1.34314575 9.34314575,5.10702591e-15 11,8.8817842e-16 L13,-5.91645679e-31 C14.6568542,-2.66453526e-15 16,1.34314575 16,3 L16,10 C17.1045695,10 18,10.8954305 18,12 L18,14.7169578 C18,15.0870774 17.8972953,15.4499373 17.7033166,15.7651527 L11.7033166,25.5151527 C11.1244146,26.4558685 9.89252095,26.7491765 8.95180515,26.1702744 C8.3603102,25.8062776 8,25.1614792 8,24.4669578 L8,11.0000005 Z M10,24.4669578 L16,14.7169578 L16,12 L10,12 L10,24.4669578 Z M14,3 C14,2.44771525 13.5522847,2 13,2 L11,2 C10.4477153,2 10,2.44771525 10,3 L10,10 L14,10 L14,3 Z" id="Combined-Shape" transform="translate(13.000000, 13.233619) rotate(-315.000000) translate(-13.000000, -13.233619) "></path>
+        </g>
+    </g>
+</svg>

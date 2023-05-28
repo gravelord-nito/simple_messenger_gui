@@ -32,7 +32,8 @@
    <item>
     <widget class="QWidget" name="widget_2" native="true">
      <property name="styleSheet">
-      <string notr="true">background-image: url(:/Desktop.png);</string>
+      <string notr="true">background-image: url(:/Desktop.png);
+</string>
      </property>
      <layout class="QVBoxLayout" name="verticalLayout_2" stretch="1,3,6,0">
       <property name="spacing">
@@ -100,8 +101,8 @@
            <string/>
           </property>
           <property name="icon">
-           <iconset resource="../project/res.qrc">
-            <normaloff>:/hi-def/minus.png</normaloff>:/hi-def/minus.png</iconset>
+           <iconset resource="project-resources.qrc">
+            <normaloff>:/standard/minus.png</normaloff>:/standard/minus.png</iconset>
           </property>
           <property name="flat">
            <bool>true</bool>
@@ -135,8 +136,8 @@ QPushButton::hover
            <string/>
           </property>
           <property name="icon">
-           <iconset>
-            <normaloff>../project/hi-def/delete.png</normaloff>../project/hi-def/delete.png</iconset>
+           <iconset resource="project-resources.qrc">
+            <normaloff>:/standard/delete.png</normaloff>:/standard/delete.png</iconset>
           </property>
           <property name="default">
            <bool>false</bool>
@@ -401,7 +402,7 @@ border-radius:10px;
   </layout>
  </widget>
  <resources>
-  <include location="../project/res.qrc"/>
+  <include location="project-resources.qrc"/>
  </resources>
  <connections/>
 </ui>

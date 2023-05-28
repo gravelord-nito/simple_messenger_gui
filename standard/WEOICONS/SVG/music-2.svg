@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="24px" height="24px" viewBox="0 0 24 24" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: Sketch 44.1 (41455) - http://www.bohemiancoding.com/sketch -->
+    <title>Bold/SVG/music-2</title>
+    <desc>Created with Sketch.</desc>
+    <defs></defs>
+    <g id="Bold-Outline" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="music-2" fill-rule="nonzero" fill="#000000">
+            <path d="M12,12.9996338 L12,6 C12,3.790861 13.790861,2 16,2 L20,2 C20.5522847,2 21,2.44771525 21,3 L21,5 C21,7.209139 19.209139,9 17,9 L14,9 L14,17 C14,19.7614237 11.7614237,22 9,22 C6.23857625,22 4,19.7614237 4,17 C4,14.2385763 6.23857625,12 9,12 C10.1256059,12 11.1643395,12.3719448 12,12.9996338 Z M9,20 C10.6568542,20 12,18.6568542 12,17 C12,15.3431458 10.6568542,14 9,14 C7.34314575,14 6,15.3431458 6,17 C6,18.6568542 7.34314575,20 9,20 Z M17,7 C18.1045695,7 19,6.1045695 19,5 L19,4 L16,4 C14.8954305,4 14,4.8954305 14,6 L14,7 L17,7 Z" id="shape"></path>
+        </g>
+    </g>
+</svg>

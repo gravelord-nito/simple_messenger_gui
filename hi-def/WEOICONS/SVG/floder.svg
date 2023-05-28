@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="24px" height="24px" viewBox="0 0 24 24" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: Sketch 44.1 (41455) - http://www.bohemiancoding.com/sketch -->
+    <title>Bold/SVG/floder</title>
+    <desc>Created with Sketch.</desc>
+    <defs></defs>
+    <g id="Bold-Outline" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="floder" fill-rule="nonzero" fill="#000000">
+            <path d="M21,9 C21,7.8954305 20.1045695,7 19,7 L12,7 C11.7347835,7 11.4804296,6.89464316 11.2928932,6.70710678 L9.17157288,4.58578644 C8.79650012,4.21071368 8.28779229,4 7.75735931,4 L5,4 C3.8954305,4 3,4.8954305 3,6 L3,9 L21,9 Z M21,11 L3,11 L3,18 C3,19.1045695 3.8954305,20 5,20 L19,20 C20.1045695,20 21,19.1045695 21,18 L21,11 Z M12.4142136,5 L19,5 C21.209139,5 23,6.790861 23,9 L23,18 C23,20.209139 21.209139,22 19,22 L5,22 C2.790861,22 1,20.209139 1,18 L1,6 C1,3.790861 2.790861,2 5,2 L7.75735931,2 C8.81822527,2 9.83564092,2.42142736 10.5857864,3.17157288 L12.4142136,5 Z" id="shape"></path>
+        </g>
+    </g>
+</svg>

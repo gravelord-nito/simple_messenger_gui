@@ -80,8 +80,8 @@ QPushButton::hover
     <string/>
    </property>
    <property name="icon">
-    <iconset resource="../project/res.qrc">
-     <normaloff>:/hi-def/minus.png</normaloff>:/hi-def/minus.png</iconset>
+    <iconset resource="project-resources.qrc">
+     <normaloff>:/standard/minus.png</normaloff>:/standard/minus.png</iconset>
    </property>
    <property name="flat">
     <bool>true</bool>
@@ -149,8 +149,8 @@ QPushButton::hover
     <string/>
    </property>
    <property name="icon">
-    <iconset resource="../project/res.qrc">
-     <normaloff>:/hi-def/delete.png</normaloff>:/hi-def/delete.png</iconset>
+    <iconset resource="project-resources.qrc">
+     <normaloff>:/standard/delete.png</normaloff>:/standard/delete.png</iconset>
    </property>
    <property name="flat">
     <bool>true</bool>
@@ -344,7 +344,7 @@ color: rgb(255, 255, 255);</string>
   <zorder>pushButton_4</zorder>
  </widget>
  <resources>
-  <include location="../project/res.qrc"/>
+  <include location="project-resources.qrc"/>
  </resources>
  <connections/>
 </ui>

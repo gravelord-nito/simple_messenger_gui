@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="24px" height="24px" viewBox="0 0 24 24" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: Sketch 44.1 (41455) - http://www.bohemiancoding.com/sketch -->
+    <title>Bold/SVG/underwear</title>
+    <desc>Created with Sketch.</desc>
+    <defs></defs>
+    <g id="Bold-Outline" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="underwear" fill-rule="nonzero" fill="#000000">
+            <path d="M3,10 L3,12.0551505 C6.80702841,12.4774469 9.93466928,15.2824544 10.7769852,19 L13.2230148,19 C14.0653307,15.2824544 17.1929716,12.4774469 21,12.0551505 L21,10 L3,10 Z M3,8 L21,8 C21,7.44771525 20.5522847,7 20,7 L4,7 C3.44771525,7 3,7.44771525 3,8 Z M1,13 L1,8 C1,6.34314575 2.34314575,5 4,5 L20,5 C21.6568542,5 23,6.34314575 23,8 L23,13 C23,13.5522847 22.5522847,14 22,14 C18.4599479,14 15.4882663,16.642874 15.0542084,20.1237399 C14.9917895,20.6242996 14.5663302,21 14.0618938,21 L9.93810625,21 C9.43366976,21 9.00821047,20.6242996 8.94579156,20.1237399 C8.51173373,16.642874 5.54005213,14 2,14 C1.44771525,14 1,13.5522847 1,13 Z" id="Combined-Shape"></path>
+        </g>
+    </g>
+</svg>

@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="24px" height="24px" viewBox="0 0 24 24" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: Sketch 44.1 (41455) - http://www.bohemiancoding.com/sketch -->
+    <title>Bold/SVG/distribute-horizontally</title>
+    <desc>Created with Sketch.</desc>
+    <defs></defs>
+    <g id="Bold-Outline" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="distribute-horizontally" fill-rule="nonzero" fill="#000000">
+            <path d="M5,21 C5,21.5522847 4.55228475,22 4,22 C3.44771525,22 3,21.5522847 3,21 L3,3 C3,2.44771525 3.44771525,2 4,2 C4.55228475,2 5,2.44771525 5,3 L5,21 Z M21,21 C21,21.5522847 20.5522847,22 20,22 C19.4477153,22 19,21.5522847 19,21 L19,3 C19,2.44771525 19.4477153,2 20,2 C20.5522847,2 21,2.44771525 21,3 L21,21 Z M15.5,6 L15.5,18 C15.5,19.1045695 14.6045695,20 13.5,20 L10.5,20 C9.3954305,20 8.5,19.1045695 8.5,18 L8.5,6 C8.5,4.8954305 9.3954305,4 10.5,4 L13.5,4 C14.6045695,4 15.5,4.8954305 15.5,6 Z M13.5,6 L10.5,6 L10.5,18 L13.5,18 L13.5,6 Z" id="Combined-Shape"></path>
+        </g>
+    </g>
+</svg>
