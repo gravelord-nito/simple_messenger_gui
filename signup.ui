@@ -1,0 +1,350 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>signup</class>
+ <widget class="QDialog" name="signup">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>658</width>
+    <height>517</height>
+   </rect>
+  </property>
+  <property name="windowTitle">
+   <string>Dialog</string>
+  </property>
+  <widget class="QListWidget" name="listWidget">
+   <property name="geometry">
+    <rect>
+     <x>-5</x>
+     <y>461</y>
+     <width>701</width>
+     <height>61</height>
+    </rect>
+   </property>
+   <property name="styleSheet">
+    <string notr="true">border:none;
+background-color: qlineargradient(spread:pad, x1:0.457, y1:1, x2:0.524038, y2:0.028, stop:0 rgba(0, 0, 0, 255), stop:0.956731 rgba(255, 98, 255, 98));</string>
+   </property>
+  </widget>
+  <widget class="QPushButton" name="loginbuttom">
+   <property name="enabled">
+    <bool>true</bool>
+   </property>
+   <property name="geometry">
+    <rect>
+     <x>250</x>
+     <y>350</y>
+     <width>131</width>
+     <height>81</height>
+    </rect>
+   </property>
+   <property name="styleSheet">
+    <string notr="true">
+QPushButton{
+font: 700 10pt &quot;Segoe UI&quot;;
+alternate-background: rgb(255, 255, 255);
+font: 600 18pt &quot;Segoe UI&quot;;
+color: rgb(255, 255, 255);
+background: rgb(70, 30, 40,100);
+padding: 10px;
+border-radius:10px;
+}</string>
+   </property>
+   <property name="text">
+    <string>create</string>
+   </property>
+  </widget>
+  <widget class="QPushButton" name="pushButton_4">
+   <property name="geometry">
+    <rect>
+     <x>600</x>
+     <y>0</y>
+     <width>31</width>
+     <height>31</height>
+    </rect>
+   </property>
+   <property name="styleSheet">
+    <string notr="true">QPushButton{
+font: 700 10pt &quot;Segoe UI&quot;;
+font: 600 11pt &quot;Segoe UI&quot;;
+color: rgb(255, 255, 0);
+background: rgb(70, 30, 40,0);
+}
+QPushButton::hover
+{
+	background-color: rgb(225, 225, 225);
+}</string>
+   </property>
+   <property name="text">
+    <string/>
+   </property>
+   <property name="icon">
+    <iconset resource="../project/res.qrc">
+     <normaloff>:/hi-def/minus.png</normaloff>:/hi-def/minus.png</iconset>
+   </property>
+   <property name="flat">
+    <bool>true</bool>
+   </property>
+  </widget>
+  <widget class="QListView" name="listView">
+   <property name="geometry">
+    <rect>
+     <x>0</x>
+     <y>0</y>
+     <width>661</width>
+     <height>461</height>
+    </rect>
+   </property>
+   <property name="styleSheet">
+    <string notr="true">border:none;
+background-image: url(:/Desktop.png);
+background-color: rgb(98, 98, 98);</string>
+   </property>
+  </widget>
+  <widget class="QLabel" name="label">
+   <property name="geometry">
+    <rect>
+     <x>260</x>
+     <y>30</y>
+     <width>201</width>
+     <height>141</height>
+    </rect>
+   </property>
+   <property name="styleSheet">
+    <string notr="true">font: 900 14pt &quot;Segoe UI Black&quot;;
+font: 900 18pt &quot;Segoe UI Black&quot;;
+color: rgb(255, 255, 255);
+background: rgb(255, 255, 255,0);
+color: rgb(0, 85, 255);
+color: rgb(42, 205, 255);</string>
+   </property>
+   <property name="text">
+    <string>Messanger</string>
+   </property>
+  </widget>
+  <widget class="QPushButton" name="pushButton_3">
+   <property name="geometry">
+    <rect>
+     <x>630</x>
+     <y>0</y>
+     <width>31</width>
+     <height>31</height>
+    </rect>
+   </property>
+   <property name="styleSheet">
+    <string notr="true">QPushButton{
+font: 700 10pt &quot;Segoe UI&quot;;
+font: 600 11pt &quot;Segoe UI&quot;;
+color: rgb(255, 255, 255);
+background: rgb(70, 30, 40,0);
+padding: 10px;
+}
+QPushButton::hover
+{
+	background-color: rgb(225, 225, 225);
+}</string>
+   </property>
+   <property name="text">
+    <string/>
+   </property>
+   <property name="icon">
+    <iconset resource="../project/res.qrc">
+     <normaloff>:/hi-def/delete.png</normaloff>:/hi-def/delete.png</iconset>
+   </property>
+   <property name="flat">
+    <bool>true</bool>
+   </property>
+  </widget>
+  <widget class="QGroupBox" name="groupBox">
+   <property name="geometry">
+    <rect>
+     <x>140</x>
+     <y>150</y>
+     <width>391</width>
+     <height>221</height>
+    </rect>
+   </property>
+   <property name="styleSheet">
+    <string notr="true">padding: 10px;
+border-radius:10px;
+background-color: rgba(255, 255, 255, 50);</string>
+   </property>
+   <property name="title">
+    <string/>
+   </property>
+   <widget class="QLabel" name="label_3">
+    <property name="geometry">
+     <rect>
+      <x>0</x>
+      <y>170</y>
+      <width>171</width>
+      <height>51</height>
+     </rect>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">background: rgb(255, 255, 255,1);
+font: 900 10pt &quot;Segoe UI Black&quot;;
+color: rgb(255, 255, 255,255);
+color: rgb(255, 255, 255);</string>
+    </property>
+    <property name="text">
+     <string>repead passwprd</string>
+    </property>
+   </widget>
+   <widget class="QLabel" name="label_2">
+    <property name="geometry">
+     <rect>
+      <x>0</x>
+      <y>130</y>
+      <width>181</width>
+      <height>51</height>
+     </rect>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">background: rgb(255, 255, 255,1);
+font: 900 10pt &quot;Segoe UI Black&quot;;
+color: rgb(255, 255, 255,255);
+color: rgb(255, 255, 255);</string>
+    </property>
+    <property name="text">
+     <string>password</string>
+    </property>
+   </widget>
+   <widget class="QLineEdit" name="lineEdit_2">
+    <property name="geometry">
+     <rect>
+      <x>180</x>
+      <y>180</y>
+      <width>211</width>
+      <height>31</height>
+     </rect>
+    </property>
+    <property name="echoMode">
+     <enum>QLineEdit::Password</enum>
+    </property>
+   </widget>
+   <widget class="QLineEdit" name="lineEdit">
+    <property name="geometry">
+     <rect>
+      <x>180</x>
+      <y>20</y>
+      <width>211</width>
+      <height>31</height>
+     </rect>
+    </property>
+   </widget>
+   <widget class="QLabel" name="label_4">
+    <property name="geometry">
+     <rect>
+      <x>0</x>
+      <y>90</y>
+      <width>181</width>
+      <height>51</height>
+     </rect>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">background: rgb(255, 255, 255,1);
+font: 900 10pt &quot;Segoe UI Black&quot;;
+color: rgb(255, 255, 255,255);
+color: rgb(255, 255, 255);</string>
+    </property>
+    <property name="text">
+     <string>username</string>
+    </property>
+   </widget>
+   <widget class="QLabel" name="label_5">
+    <property name="geometry">
+     <rect>
+      <x>0</x>
+      <y>10</y>
+      <width>181</width>
+      <height>51</height>
+     </rect>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">background: rgb(255, 255, 255,1);
+font: 900 10pt &quot;Segoe UI Black&quot;;
+color: rgb(255, 255, 255,255);
+color: rgb(255, 255, 255);</string>
+    </property>
+    <property name="text">
+     <string>fristname</string>
+    </property>
+   </widget>
+   <widget class="QLabel" name="label_6">
+    <property name="geometry">
+     <rect>
+      <x>0</x>
+      <y>50</y>
+      <width>181</width>
+      <height>51</height>
+     </rect>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">background: rgb(255, 255, 255,1);
+font: 900 10pt &quot;Segoe UI Black&quot;;
+color: rgb(255, 255, 255,255);
+color: rgb(255, 255, 255);</string>
+    </property>
+    <property name="text">
+     <string>lastname</string>
+    </property>
+   </widget>
+   <widget class="QLineEdit" name="lineEdit_3">
+    <property name="geometry">
+     <rect>
+      <x>180</x>
+      <y>60</y>
+      <width>211</width>
+      <height>31</height>
+     </rect>
+    </property>
+   </widget>
+   <widget class="QLineEdit" name="lineEdit_4">
+    <property name="geometry">
+     <rect>
+      <x>180</x>
+      <y>100</y>
+      <width>211</width>
+      <height>31</height>
+     </rect>
+    </property>
+   </widget>
+   <widget class="QLineEdit" name="lineEdit_5">
+    <property name="geometry">
+     <rect>
+      <x>180</x>
+      <y>140</y>
+      <width>211</width>
+      <height>31</height>
+     </rect>
+    </property>
+    <property name="echoMode">
+     <enum>QLineEdit::Password</enum>
+    </property>
+   </widget>
+   <zorder>lineEdit_2</zorder>
+   <zorder>label_2</zorder>
+   <zorder>label_3</zorder>
+   <zorder>lineEdit</zorder>
+   <zorder>label_4</zorder>
+   <zorder>label_6</zorder>
+   <zorder>label_5</zorder>
+   <zorder>lineEdit_3</zorder>
+   <zorder>lineEdit_4</zorder>
+   <zorder>lineEdit_5</zorder>
+  </widget>
+  <zorder>listWidget</zorder>
+  <zorder>loginbuttom</zorder>
+  <zorder>listView</zorder>
+  <zorder>label</zorder>
+  <zorder>pushButton_3</zorder>
+  <zorder>groupBox</zorder>
+  <zorder>pushButton_4</zorder>
+ </widget>
+ <resources>
+  <include location="../project/res.qrc"/>
+ </resources>
+ <connections/>
+</ui>
