@@ -1,0 +1,10 @@
+release/asly.o
+release/main.o
+release/mainwindow.o
+release/signup.o
+release/welcom.o
+release/qrc_project-resource.o
+release/moc_asly.o
+release/moc_mainwindow.o
+release/moc_signup.o
+release/moc_welcom.o
