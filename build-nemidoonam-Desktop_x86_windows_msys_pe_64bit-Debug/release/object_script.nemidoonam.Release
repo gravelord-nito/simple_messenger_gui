@@ -1,5 +1,6 @@
 release/asly.o
 release/test.o
+release/tools.o
 release/main.o
 release/mainwindow.o
 release/signup.o

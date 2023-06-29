@@ -2,7 +2,8 @@
 #include"asly.h"
 #include <QApplication>
 #include"welcom.h"
-#include"http\tools.cpp"
+#include"http\tools.h"
+
 int main(int argc, char *argv[])
 {
     QApplication a(argc, argv);
