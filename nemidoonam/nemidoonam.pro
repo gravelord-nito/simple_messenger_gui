@@ -10,6 +10,8 @@ CONFIG += c++17
 
 SOURCES += \
     asly.cpp \
+    http/test.cpp \
+    http/tools.cpp \
     main.cpp \
     mainwindow.cpp \
     signup.cpp \
@@ -17,6 +19,9 @@ SOURCES += \
 
 HEADERS += \
     asly.h \
+    http/HTTPRequest.hpp \
+    http/json.hpp \
+    http/tools.h \
     mainwindow.h \
     signup.h \
     welcom.h

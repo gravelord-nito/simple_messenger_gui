@@ -80,7 +80,7 @@ public:
     template<typename T>
     void sendMessage(const std::string& body, const std::string& dst)
     {
-        string s;
+        std::string s;
         if (std::is_same<T, Group>::value) {
             s = "group";
         } else if (std::is_same<T, Channel>::value) {
@@ -88,10 +88,10 @@ public:
         } else {
             s = "user";
         }
-        map<string, string> mm {{"token", token}, {"body", body}, {"dst", dst}}
-        json res = http_get("sendmessage" + s, mm);
+        std::map<std::string, std::string> mm {{"token", token}, {"body", body}, {"dst", dst}};
+        nlohmann::json res = http_get("sendmessage" + s, mm);
         if (res["code"] != "200") {
-            throw runtime_error(res["message"]);
+            throw std::runtime_error(res["message"]);
         }
     }
 

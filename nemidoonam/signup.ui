@@ -74,8 +74,8 @@ background-color: rgb(98, 98, 98);</string>
   <widget class="QLabel" name="label">
    <property name="geometry">
     <rect>
-     <x>260</x>
-     <y>30</y>
+     <x>240</x>
+     <y>-10</y>
      <width>201</width>
      <height>141</height>
     </rect>
@@ -127,10 +127,10 @@ QPushButton::hover
   <widget class="QGroupBox" name="groupBox">
    <property name="geometry">
     <rect>
-     <x>140</x>
-     <y>150</y>
+     <x>130</x>
+     <y>110</y>
      <width>391</width>
-     <height>221</height>
+     <height>301</height>
     </rect>
    </property>
    <property name="styleSheet">
@@ -292,6 +292,25 @@ color: rgb(255, 255, 255);</string>
      <enum>QLineEdit::Password</enum>
     </property>
    </widget>
+   <widget class="QPushButton" name="pushButton">
+    <property name="geometry">
+     <rect>
+      <x>80</x>
+      <y>220</y>
+      <width>211</width>
+      <height>61</height>
+     </rect>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">background: rgb(255, 255, 255,1);
+font: 900 20pt &quot;Segoe UI Black&quot;;
+color: rgb(255, 255, 255,255);
+color: rgb(255, 255, 255);</string>
+    </property>
+    <property name="text">
+     <string>signup</string>
+    </property>
+   </widget>
    <zorder>repeadpass</zorder>
    <zorder>label_2</zorder>
    <zorder>label_3</zorder>
@@ -302,6 +321,7 @@ color: rgb(255, 255, 255);</string>
    <zorder>lastname</zorder>
    <zorder>username</zorder>
    <zorder>pass</zorder>
+   <zorder>pushButton</zorder>
   </widget>
  </widget>
  <resources>

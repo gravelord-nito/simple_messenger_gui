@@ -2,7 +2,7 @@
 #define SIGNUP_H
 
 #include <QDialog>
-
+#include"http\tools.h"
 namespace Ui {
 class signup;
 }
