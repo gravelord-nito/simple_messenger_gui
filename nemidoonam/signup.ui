@@ -24,7 +24,8 @@
    </property>
    <property name="styleSheet">
     <string notr="true">border:none;
-background-color: qlineargradient(spread:pad, x1:0.457, y1:1, x2:0.524038, y2:0.028, stop:0 rgba(0, 0, 0, 255), stop:0.956731 rgba(255, 98, 255, 98));</string>
+background-color: qlineargradient(spread:pad, x1:0.457, y1:1, x2:0.524038, y2:0.028, stop:0 rgba(0, 0, 0, 255), stop:0.956731 rgba(255, 98, 255, 98));background-color: rgb(68, 68, 68);
+color: rgb(68, 68, , 68);</string>
    </property>
   </widget>
   <widget class="QPushButton" name="loginbuttom">
@@ -53,38 +54,6 @@ border-radius:10px;
    </property>
    <property name="text">
     <string>create</string>
-   </property>
-  </widget>
-  <widget class="QPushButton" name="pushButton_4">
-   <property name="geometry">
-    <rect>
-     <x>600</x>
-     <y>0</y>
-     <width>31</width>
-     <height>31</height>
-    </rect>
-   </property>
-   <property name="styleSheet">
-    <string notr="true">QPushButton{
-font: 700 10pt &quot;Segoe UI&quot;;
-font: 600 11pt &quot;Segoe UI&quot;;
-color: rgb(255, 255, 0);
-background: rgb(70, 30, 40,0);
-}
-QPushButton::hover
-{
-	background-color: rgb(225, 225, 225);
-}</string>
-   </property>
-   <property name="text">
-    <string/>
-   </property>
-   <property name="icon">
-    <iconset resource="project-resource.qrc">
-     <normaloff>:/new/prefix1/standard/minus.png</normaloff>:/new/prefix1/standard/minus.png</iconset>
-   </property>
-   <property name="flat">
-    <bool>true</bool>
    </property>
   </widget>
   <widget class="QListView" name="listView">
@@ -134,15 +103,14 @@ color: rgb(42, 205, 255);</string>
    </property>
    <property name="styleSheet">
     <string notr="true">QPushButton{
-font: 700 10pt &quot;Segoe UI&quot;;
-font: 600 11pt &quot;Segoe UI&quot;;
-color: rgb(255, 255, 255);
-background: rgb(70, 30, 40,0);
+border:none;
+background:rgb(218, 158, 255,0);
+	color: rgb(198, 107, 255);
 padding: 10px;
 }
 QPushButton::hover
 {
-	background-color: rgb(225, 225, 225);
+	background-color: red;
 }</string>
    </property>
    <property name="text">
@@ -153,7 +121,7 @@ QPushButton::hover
      <normaloff>:/new/prefix1/standard/delete.png</normaloff>:/new/prefix1/standard/delete.png</iconset>
    </property>
    <property name="flat">
-    <bool>true</bool>
+    <bool>false</bool>
    </property>
   </widget>
   <widget class="QGroupBox" name="groupBox">
@@ -211,7 +179,7 @@ color: rgb(255, 255, 255);</string>
      <string>password</string>
     </property>
    </widget>
-   <widget class="QLineEdit" name="lineEdit_2">
+   <widget class="QLineEdit" name="repeadpass">
     <property name="geometry">
      <rect>
       <x>180</x>
@@ -224,7 +192,7 @@ color: rgb(255, 255, 255);</string>
      <enum>QLineEdit::Password</enum>
     </property>
    </widget>
-   <widget class="QLineEdit" name="lineEdit">
+   <widget class="QLineEdit" name="firstname">
     <property name="geometry">
      <rect>
       <x>180</x>
@@ -291,7 +259,7 @@ color: rgb(255, 255, 255);</string>
      <string>lastname</string>
     </property>
    </widget>
-   <widget class="QLineEdit" name="lineEdit_3">
+   <widget class="QLineEdit" name="lastname">
     <property name="geometry">
      <rect>
       <x>180</x>
@@ -301,7 +269,7 @@ color: rgb(255, 255, 255);</string>
      </rect>
     </property>
    </widget>
-   <widget class="QLineEdit" name="lineEdit_4">
+   <widget class="QLineEdit" name="username">
     <property name="geometry">
      <rect>
       <x>180</x>
@@ -311,7 +279,7 @@ color: rgb(255, 255, 255);</string>
      </rect>
     </property>
    </widget>
-   <widget class="QLineEdit" name="lineEdit_5">
+   <widget class="QLineEdit" name="pass">
     <property name="geometry">
      <rect>
       <x>180</x>
@@ -324,24 +292,17 @@ color: rgb(255, 255, 255);</string>
      <enum>QLineEdit::Password</enum>
     </property>
    </widget>
-   <zorder>lineEdit_2</zorder>
+   <zorder>repeadpass</zorder>
    <zorder>label_2</zorder>
    <zorder>label_3</zorder>
-   <zorder>lineEdit</zorder>
+   <zorder>firstname</zorder>
    <zorder>label_4</zorder>
    <zorder>label_6</zorder>
    <zorder>label_5</zorder>
-   <zorder>lineEdit_3</zorder>
-   <zorder>lineEdit_4</zorder>
-   <zorder>lineEdit_5</zorder>
+   <zorder>lastname</zorder>
+   <zorder>username</zorder>
+   <zorder>pass</zorder>
   </widget>
-  <zorder>listWidget</zorder>
-  <zorder>loginbuttom</zorder>
-  <zorder>listView</zorder>
-  <zorder>label</zorder>
-  <zorder>pushButton_3</zorder>
-  <zorder>groupBox</zorder>
-  <zorder>pushButton_4</zorder>
  </widget>
  <resources>
   <include location="project-resource.qrc"/>

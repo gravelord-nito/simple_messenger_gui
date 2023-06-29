@@ -52,7 +52,7 @@ background-image: url(:/new/prefix1/Desktop.png);</string>
        <number>0</number>
       </property>
       <item>
-       <layout class="QHBoxLayout" name="horizontalLayout_3" stretch="10,10,1,1">
+       <layout class="QHBoxLayout" name="horizontalLayout_3" stretch="10,10,1">
         <property name="spacing">
          <number>0</number>
         </property>
@@ -81,33 +81,6 @@ background-image: url(:/new/prefix1/Desktop.png);</string>
            </size>
           </property>
          </spacer>
-        </item>
-        <item>
-         <widget class="QPushButton" name="pushButton">
-          <property name="minimumSize">
-           <size>
-            <width>10</width>
-            <height>10</height>
-           </size>
-          </property>
-          <property name="styleSheet">
-           <string notr="true">QPushButton::hover
-{
-	background-color: rgb(225, 225, 225,255);
-}
-</string>
-          </property>
-          <property name="text">
-           <string/>
-          </property>
-          <property name="icon">
-           <iconset resource="project-resource.qrc">
-            <normaloff>:/new/prefix1/standard/minus.png</normaloff>:/new/prefix1/standard/minus.png</iconset>
-          </property>
-          <property name="flat">
-           <bool>true</bool>
-          </property>
-         </widget>
         </item>
         <item>
          <widget class="QPushButton" name="pushButton_2">

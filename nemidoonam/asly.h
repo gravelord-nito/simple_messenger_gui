@@ -15,6 +15,17 @@ public:
     explicit asly(QWidget *parent = nullptr);
     ~asly();
 
+private slots:
+    void on_pushButton_2_clicked();
+
+    void on_safejadid_clicked();
+
+    void on_pushButton_16_clicked();
+
+    void on_pushButton_14_clicked();
+
+    void on_pushButton_20_clicked();
+
 private:
     Ui::asly *ui;
 };
