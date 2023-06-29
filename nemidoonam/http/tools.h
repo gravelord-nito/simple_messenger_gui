@@ -4,8 +4,8 @@
 #include <string>
 #include <vector>
 #include <map>
-#include "HTTPRequest.hpp"
-#include "json.hpp"
+#include "http/HTTPRequest.hpp"
+#include "http/json.hpp"
 
 nlohmann::json http_get(std::map<std::string, std::string>&);
 nlohmann::json http_get(const std::string&, std::map<std::string, std::string>&);

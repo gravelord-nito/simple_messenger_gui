@@ -7,7 +7,13 @@ asly::asly(QWidget *parent) :
 {
     ui->setupUi(this);
 }
+void asly::showcontact(){
 
+}
+void asly::showmessege()
+{
+
+}
 asly::~asly()
 {
     delete ui;
