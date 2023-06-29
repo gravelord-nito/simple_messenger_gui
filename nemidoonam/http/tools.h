@@ -4,8 +4,8 @@
 #include <string>
 #include <vector>
 #include <map>
-#include "HTTPRequest.hpp"
-#include "json.hpp"
+#include "http/HTTPRequest.hpp"
+#include "http/json.hpp"
 
 class absChat;
 class Chat;

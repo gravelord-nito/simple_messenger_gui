@@ -202,7 +202,7 @@ border-color: none;
            <string/>
           </property>
           <property name="icon">
-           <iconset resource="project-resource.qrc">
+           <iconset>
             <normaloff>:/new/prefix1/standard/arrowleft.png</normaloff>:/new/prefix1/standard/arrowleft.png</iconset>
           </property>
          </widget>
@@ -777,7 +777,7 @@ QPushButton::hover
             <string/>
            </property>
            <property name="icon">
-            <iconset resource="project-resource.qrc">
+            <iconset>
              <normaloff>:/new/prefix1/standard/arrowright.png</normaloff>:/new/prefix1/standard/arrowright.png</iconset>
            </property>
            <property name="flat">
@@ -833,7 +833,7 @@ QPushButton::hover
             <string/>
            </property>
            <property name="icon">
-            <iconset resource="project-resource.qrc">
+            <iconset>
              <normaloff>:/new/prefix1/standard/magnifyingglass.png</normaloff>:/new/prefix1/standard/magnifyingglass.png</iconset>
            </property>
            <property name="flat">
@@ -881,6 +881,21 @@ border-color: none;</string>
           </rect>
          </property>
          <layout class="QVBoxLayout" name="verticalLayout">
+          <property name="spacing">
+           <number>0</number>
+          </property>
+          <property name="leftMargin">
+           <number>0</number>
+          </property>
+          <property name="topMargin">
+           <number>0</number>
+          </property>
+          <property name="rightMargin">
+           <number>0</number>
+          </property>
+          <property name="bottomMargin">
+           <number>0</number>
+          </property>
           <item>
            <widget class="QGroupBox" name="groupBox_15">
             <property name="maximumSize">
@@ -986,7 +1001,7 @@ background-color: rgb(120, 255, 140);
             <string/>
            </property>
            <property name="icon">
-            <iconset resource="project-resource.qrc">
+            <iconset>
              <normaloff>:/new/prefix1/standard/man.png</normaloff>:/new/prefix1/standard/man.png</iconset>
            </property>
            <property name="iconSize">
@@ -1119,7 +1134,7 @@ background-color: rgb(201, 209, 213,0);
             <string/>
            </property>
            <property name="icon">
-            <iconset resource="project-resource.qrc">
+            <iconset>
              <normaloff>:/new/prefix1/standard/games.png</normaloff>:/new/prefix1/standard/games.png</iconset>
            </property>
           </widget>
@@ -1172,7 +1187,7 @@ background-color: rgb(201, 209, 213,0);
             <string/>
            </property>
            <property name="icon">
-            <iconset resource="project-resource.qrc">
+            <iconset>
              <normaloff>:/new/prefix1/standard/arrowright.png</normaloff>:/new/prefix1/standard/arrowright.png</iconset>
            </property>
           </widget>
@@ -1317,7 +1332,7 @@ background-color: rgb(255, 255, 255,0);</string>
              <string/>
             </property>
             <property name="icon">
-             <iconset resource="project-resource.qrc">
+             <iconset>
               <normaloff>:/new/prefix1/standard/arrowright.png</normaloff>:/new/prefix1/standard/arrowright.png</iconset>
             </property>
            </widget>
@@ -1416,8 +1431,6 @@ color: rgb(255, 255, 255);</string>
    </item>
   </layout>
  </widget>
- <resources>
-  <include location="project-resource.qrc"/>
- </resources>
+ <resources/>
  <connections/>
 </ui>

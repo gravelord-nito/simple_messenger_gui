@@ -26,6 +26,10 @@ private slots:
 
     void on_pushButton_20_clicked();
 
+    void showmessege();
+
+    void showcontact();
+
 private:
     Ui::asly *ui;
 };
