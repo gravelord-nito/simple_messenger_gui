@@ -3,9 +3,14 @@
 #include <iostream>
 #include <string>
 #include <vector>
-#include <set>
+#include <map>
+#include "sha256.h"
+#include "HTTPRequest.hpp"
+#include "json.hpp"
 
-using namespace std;
+nlohmann::json http_get(std::map<std::string, std::string>&);
+nlohmann::json http_get(const std::string&, std::map<std::string, std::string>&);
+
 
 class absChat;
 class Chat;
@@ -14,20 +19,19 @@ class Channel;
 class Message;
 class User;
 
-
 class absChat // TODO add pins
 {
 public:
-    virtual void addMessage(Message&) = 0;
+    virtual void addMessage(Message*) = 0;
 protected:
-    vector<Message&> messages; // TODO implement comparator
+    std::vector<Message*> messages; // TODO sort it
 };
 
 class Chat: public absChat
 {
 public:
     Chat(User* mem1, User* mem2);
-    void addMessage(Message&) override;
+    void addMessage(Message*) override;
     ~Chat();
 private:
     User* user[2];
@@ -36,66 +40,56 @@ private:
 class Group: public absChat
 {
 public:
-    Group(string, string, User&);
-    void addMessage(Message&) override;
-    void addMember(User&);
-    void setTitle(string);
+    Group(const std::string&, const std::string&, User*);
+    void addMessage(Message*) override;
+    void addMember(User*);
+    void setTitle(const std::string&);
 private:
-    string id;
-    string group_title;
-    vector<User&> members;
+    std::string id;
+    std::string group_title;
+    std::vector<User*> members;
 };
 
 class Channel: public absChat
 {
 public:
-    Channel(string, string, User&);
-    void addMessage(Message&) override;
-    void addMember(User&);
-    void setTitle(string);
+    Channel(const std::string&, const std::string&, User*);
+    void addMessage(Message*) override;
+    void addMember(User*);
+    void setTitle(const std::string&);
 private:
-    string id;
-    string channel_title;
-    vector<User&> members;
+    std::string id;
+    std::string channel_title;
+    std::vector<User*> members;
 };
 
 class User
 {
 public:
+    static bool exist;
     User() = delete;
-    User(string, string, string, string); // no token and chats
-    // void setToken(string);
-    const string getToken() const;
-    // void setUserName(const string s);
-    // string getUserName() const;
-    // void setPassword(BYTE*);
-    bool checkPassword(string) const;
-    // void setFname(string);
-    // string getFname() const;
-    // void setSname(string);
-    // string getSname() const;
-    void addChat(absChat&);
+    User(const std::string&, const std::string&);
+    bool checkPassword(const std::string&);
+    void setToken(const std::string&);
+    const std::string getToken();
+    void addChat(absChat*);
+    ~User();
 private:
-    string token;
-    string username;
+    std::string token;
+    std::string username;
     BYTE password[SHA256_BLOCK_SIZE];
-    string first_name;
-    string last_name;
-    set<absChat&> chats; // TODO implement comparator
+    std::vector<absChat*> chats;
 };
 
 class Message
 {
 public:
     Message() = delete;
-    Message(string, string, User*, absChat*);
-    // void setMessage(string);
-    // void setTime(string);
-    // string getTime() const;
+    Message(const std::string&, const std::string&, User*, absChat*);
     ~Message();
 private:
-    string body;
-    string time;
+    std::string body;
+    std::string time;
     User* sender;
     absChat* destination;
 };

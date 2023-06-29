@@ -154,7 +154,8 @@ BYTE* sha256_hash(char* s, char* SALT){
 	BYTE* buff = (BYTE*)malloc( SHA256_BLOCK_SIZE * sizeof(BYTE) );
     SHA256_CTX ctx;
 	sha256_init(&ctx);
-	for(int i=0;i<ITER;i++) sha256_update(&ctx, text, strlen(text));
+	for(int i=0;i<ITER;i++) sha256_update(&ctx, text, size);
 	sha256_final(&ctx, buff);
+	free(text);
     return buff;
 }
