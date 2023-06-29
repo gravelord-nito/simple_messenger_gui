@@ -58,6 +58,11 @@ absChat::~absChat() {}
 
 // Implementation of Channel class
 
+Channel::Channel(const std::string& _id, User* crt)
+    : absChat(_id), admin_id(crt->getUser())
+{
+    crt->sendMessage<Channel>(crt->getUser(), this->id);
+}
 
 // Implementation of User class
 

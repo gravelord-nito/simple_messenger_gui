@@ -22,28 +22,49 @@ class User;
 class absChat // TODO add operator <
 {
 public:
+    absChat(const std::string& _id): id(_id) {}
     void addMessage(Message*);
     void setID(const std::string&);
     virtual ~absChat() = 0;
 protected:
-    std::string id; // id contact or group (dst)
+    std::string id; // contact or group id (dst)
     std::vector<Message*> messages;
 };
 
-class Chat: public absChat {};
+class Chat: public absChat
+{
+public:
+    Chat(const std::string& _id): absChat(_id) {}
+};
 
-class Group: public absChat {};
+class Group: public absChat
+{
+public:
+    Group(const std::string& _id): absChat(_id) {}
+};
 
-class Channel: public absChat {};
+class Channel: public absChat
+{
+public:
+    Channel(const std::string& _id): absChat(_id) {}
+    Channel(const std::string& _id, const std::string& crt): absChat(_id), admin_id(crt) {}
+    Channel(const std::string& _id, User* crt);
+private:
+    std::string admin_id;
+};
 
 class User
 {
 public:
     static bool exist; // singleton
     User(const std::string&, const std::string&);
+    //void retrieveFile();
+    //void retrieveServer();
+
     const std::string getToken();
     const std::string getUser();
     void addChat(absChat*);
+
     template<typename T>
     void createChat(const std::string& id)
     {
@@ -53,8 +74,27 @@ public:
         if (res["code"]!="200"){
             throw std::runtime_error(res["message"]);
         }
-        addChat(new T);
+        addChat(new T(id, this));
     }
+
+    template<typename T>
+    void sendMessage(const std::string& body, const std::string& dst)
+    {
+        string s;
+        if (std::is_same<T, Group>::value) {
+            s = "group";
+        } else if (std::is_same<T, Channel>::value) {
+            s = "channel";
+        } else {
+            s = "user";
+        }
+        map<string, string> mm {{"token", token}, {"body", body}, {"dst", dst}}
+        json res = http_get("sendmessage" + s, mm);
+        if (res["code"] != "200") {
+            throw runtime_error(res["message"]);
+        }
+    }
+
     ~User();
 private:
     std::string token;
@@ -68,7 +108,6 @@ class Message
 public:
     Message() = delete;
     Message(const std::string&, const std::string&, const std::string&, const std::string&);
-    ~Message();
 private:
     std::string body;
     std::string time;
