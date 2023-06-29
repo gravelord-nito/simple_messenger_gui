@@ -52,13 +52,25 @@ void test3()
 
 void test4()
 {
-    User a("mara","1234");
-    a.createChat<Channel>("mamadkhafanak");
+    char c = 'a' + rand()%26;
+    User a("mara"+c,"1234");
+    a.createChat<Channel>("mamadkhafanak"+c);
+}
+
+void test5()
+{
+    map<string, string> m = {
+        {"command", "signup"},
+        {"username", "hesam2"},
+        {"password", "masterpasswhoevencares"},
+        {"firstname", "test"},
+        {"secondname", "server"}
+    };
+    http_get(m);
 }
 
 int main()
 {
-    test4();
 
     return 0;
 }

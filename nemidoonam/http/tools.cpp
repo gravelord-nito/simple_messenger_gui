@@ -4,12 +4,13 @@
 #include <thread>
 #include "tools.h"
 
+#define Quer map<string, string>
 
 using namespace std;
 using json = nlohmann::json;
 
 
-json http_get(const string& command, map<string, string>& queries)
+json http_get(const string& command, Quer& queries)
 {
     string url = "http://api.barafardayebehtar.ml:8080/";
     url += command + '?';
@@ -27,7 +28,7 @@ json http_get(const string& command, map<string, string>& queries)
     } 
 }
 
-json http_get(map<string, string>& queries)
+json http_get(Quer& queries)
 {
     if(queries.find("command") == queries.end()) {
         throw invalid_argument("invalid http request: command not defined");
@@ -41,6 +42,11 @@ json http_get(map<string, string>& queries)
 void absChat::addMessage(Message* message)
 {
     messages.emplace_back(message);
+}
+
+const string absChat::getID()
+{
+    return id;
 }
 
 void absChat::setID(const string& id)
@@ -61,7 +67,7 @@ absChat::~absChat() {}
 Channel::Channel(const std::string& _id, User* crt)
     : absChat(_id), admin_id(crt->getUser())
 {
-    crt->sendMessage<Channel>(crt->getUser(), this->id);
+    crt->sendMessage<Channel>(crt->getUser(), this);
 }
 
 // Implementation of User class
@@ -77,7 +83,7 @@ User::User(const string& username, const string& password)
     this->username = username;
     this->password = password;
 
-    map<string, string> mm {{"username", username}, {"password", password}};
+    Quer mm {{"username", username}, {"password", password}};
     http_get("signup", mm);
     json res = http_get("login", mm);
     if(res["code"]!="200"){
@@ -105,9 +111,10 @@ void User::addChat(absChat* chat)
 
 User::~User()
 {
-    map<string, string> mm {{"username", username}, {"password", password}};
+    Quer mm {{"username", username}, {"password", password}};
     http_get("logout", mm);
     User::exist = 0;
+    for (auto& x:chats) delete x;
 }
 
 // Implemenation of Message class

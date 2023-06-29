@@ -24,6 +24,7 @@ class absChat // TODO add operator <
 public:
     absChat(const std::string& _id): id(_id) {}
     void addMessage(Message*);
+    const std::string getID();
     void setID(const std::string&);
     virtual ~absChat() = 0;
 protected:
@@ -58,8 +59,9 @@ class User
 public:
     static bool exist; // singleton
     User(const std::string&, const std::string&);
-    //void retrieveFile();
-    //void retrieveServer();
+    // void retrieveFile();
+    // template<typename T> void retrieveChat(const absChat&);
+    // void retrieveServer();
 
     const std::string getToken();
     const std::string getUser();
@@ -78,7 +80,7 @@ public:
     }
 
     template<typename T>
-    void sendMessage(const std::string& body, const std::string& dst)
+    void sendMessage(const std::string& body, absChat* dst)
     {
         std::string s;
         if (std::is_same<T, Group>::value) {
@@ -88,11 +90,12 @@ public:
         } else {
             s = "user";
         }
-        std::map<std::string, std::string> mm {{"token", token}, {"body", body}, {"dst", dst}};
+        std::map<std::string, std::string> mm {{"token", token}, {"body", body}, {"dst", dst->getID()}};
         nlohmann::json res = http_get("sendmessage" + s, mm);
         if (res["code"] != "200") {
             throw std::runtime_error(res["message"]);
         }
+        // retrieveChat<T>(dst);
     }
 
     ~User();
