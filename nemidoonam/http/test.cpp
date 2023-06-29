@@ -1,4 +1,5 @@
 #include <iostream>
+#include <algorithm>
 #include "tools.h"
 
 using namespace std;
@@ -69,8 +70,39 @@ void test5()
     http_get(m);
 }
 
+void test6()
+{
+    map<string, string> m {
+        {"command", "logout"},
+        {"username", "dara"},
+        {"password", "1234"}
+    }; http_get(m);
+    User M("dara", "1234");
+    absChat* cc; 
+    cc = new Chat("sara");
+    M.sendMessage<Chat>("message", cc);
+    delete cc;
+
+    cc = M.createChat<Group>("erfangeramzzzzzzili");
+    M.sendMessage<Group>("message", cc);
+    delete cc;
+
+}
+
+void test7()
+{
+    map<string, string> m {
+        {"command", "logout"},
+        {"username", "sara"},
+        {"password", "1234"}
+    }; http_get(m);
+    User M("sara", "1234");
+    M.retrieveServer();
+}
+
 int main()
 {
+    test7();
 
     return 0;
 }
