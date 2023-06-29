@@ -1,13 +1,11 @@
 #include <iostream>
-#include "classes.h"
+#include "tools.h"
 
 using namespace std;
 
 void test1() 
 {
-    User user("a", "badman");
-    cerr << user.checkPassword("badmad") << endl;
-    cerr << user.checkPassword("badman") << endl;
+    User user("dara", "1234");
 }
 
 void test2()
@@ -47,14 +45,20 @@ void test2()
 
 void test3()
 {
-    User a2("a","b");
-    // a2.~User();
+    User a2("dara","1234");
+    a2.~User();
     User a1("d","f");
+}
+
+void test4()
+{
+    User a("mara","1234");
+    a.createChat<Channel>("mamadkhafanak");
 }
 
 int main()
 {
-    
+    test4();
 
     return 0;
 }
