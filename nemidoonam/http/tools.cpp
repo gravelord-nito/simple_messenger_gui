@@ -107,6 +107,11 @@ const string& Channel::getAdmin()
 
 // Implementation of User class
 
+User::User()
+{
+    // TODO file
+}
+
 User::User(const string& username, const string& password)
 {
     this->username = username;
@@ -175,4 +180,5 @@ User::~User()
     Quer mm {{"username", username}, {"password", password}};
     http_get("logout", mm);
     for (auto& x:chats) delete x;
+    
 }

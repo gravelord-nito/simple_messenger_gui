@@ -70,77 +70,23 @@ private:
     std::string admin_id;
 };
 
-
-
-
 class User
 {
 public:
     // static bool exist; // singleton ??
+    User();
     User(const std::string&, const std::string&);
-    template<typename T> void retrieveChat(absChat* chat)
-    {
-        std::map<std::string, std::string> mm {{"token", token}, {"dst", chat->getID()}};
-        nlohmann::json res = http_get("get" + T::stringView() + "chats", mm);
-        if (res["code"] != "200") {
-            throw std::runtime_error("unexpected error");
-        }
-        for (int i=chat->messageNum();i<res.size()-2;i++) chat->addMessage(new Message(res["block " + std::to_string(i)]));
-    }
     void retrieveServer();
+    template<typename T> void retrieveChat(absChat* chat);
 
     const std::string getToken();
     const std::string getUser();
     std::vector<absChat*> getChats();
     void addChat(absChat*);
 
-    template<typename T> T* joinChannel(const std::string& id)
-    {
-        std::string s = T::stringView();
-
-        std::map<std::string, std::string> mm {{"token", token}, {s + "_name", id}};
-        nlohmann::json res = http_get("join" + s, mm);
-        if (res["code"]!="200"){
-            throw std::runtime_error(res["message"]);
-        }
-
-        T* new_chat = new T(id);
-        retrieveChat<T>(new_chat);
-        addChat(new_chat);
-        return new_chat;
-    }
-
-    template<typename T> T* createChat(const std::string& id)
-    {
-        std::string s = T::stringView();
-
-        std::map<std::string, std::string> mm {{"token", token}, {s + "_name", id}};
-        nlohmann::json res = http_get("create" + s, mm);
-        if (res["code"]!="200"){
-            throw std::runtime_error(res["message"]);
-        }
-
-        T* new_chat = new T(id);
-        if (std::is_same<T, Channel>::value) {
-            sendMessage(username, T);
-            T->setAdmin(username);
-        }
-        addChat(new_chat);
-        return new_chat;
-    }
-
-    template<typename T> void sendMessage(const std::string& body, absChat* dst)
-    {
-        std::string s = T::stringView();
-
-        std::map<std::string, std::string> mm {{"token", token}, {"body", body}, {"dst", dst->getID()}};
-        nlohmann::json res = http_get("sendmessage" + s, mm);
-        if (res["code"] != "200") {
-            throw std::runtime_error(res["message"]);
-        }
-
-        retrieveChat<T>(dst);
-    }
+    template<typename T> T* joinChannel(const std::string& id);
+    template<typename T> T* createChat(const std::string& id);
+    template<typename T> void sendMessage(const std::string& body, absChat* dst);
 
     ~User();
 private:
@@ -149,3 +95,57 @@ private:
     std::string password;
     std::vector<absChat*> chats; // change it to set??
 };
+
+template<typename T> void User::retrieveChat(absChat* chat)
+{
+    std::map<std::string, std::string> mm {{"token", token}, {"dst", chat->getID()}};
+    nlohmann::json res = http_get("get" + T::stringView() + "chats", mm);
+    if (res["code"] != "200") {
+        throw std::runtime_error("unexpected error");
+    }
+    for (int i=chat->messageNum();i<res.size()-2;i++) chat->addMessage(new Message(res["block " + std::to_string(i)]));
+}
+
+template<typename T> void User::sendMessage(const std::string& body, absChat* dst)
+{
+    std::string s = T::stringView();
+
+    std::map<std::string, std::string> mm {{"token", token}, {"body", body}, {"dst", dst->getID()}};
+    nlohmann::json res = http_get("sendmessage" + s, mm);
+    if (res["code"] != "200") {
+        throw std::runtime_error(res["message"]);
+    }
+
+    retrieveChat<T>(dst);
+}
+
+template<typename T> T* User::joinChannel(const std::string& id)
+{
+    std::string s = T::stringView();
+
+    std::map<std::string, std::string> mm {{"token", token}, {s + "_name", id}};
+    nlohmann::json res = http_get("join" + s, mm);
+    if (res["code"]!="200"){
+        throw std::runtime_error(res["message"]);
+    }
+
+    T* new_chat = new T(id);
+    retrieveChat<T>(new_chat);
+    addChat(new_chat);
+    return new_chat;
+}
+
+template<typename T> T* User::createChat(const std::string& id)
+{
+    std::string s = T::stringView();
+
+    std::map<std::string, std::string> mm {{"token", token}, {s + "_name", id}};
+    nlohmann::json res = http_get("create" + s, mm);
+    if (res["code"]!="200"){
+        throw std::runtime_error(res["message"]);
+    }
+
+    T* new_chat = new T(id);
+    addChat(new_chat);
+    return new_chat;
+}
