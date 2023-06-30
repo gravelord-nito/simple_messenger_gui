@@ -4,8 +4,8 @@
 #include <string>
 #include <vector>
 #include <map>
-#include "http/HTTPRequest.hpp"
-#include "http/json.hpp"
+#include "HTTPRequest.hpp"
+#include "json.hpp"
 
 class absChat;
 class Chat;
@@ -79,7 +79,7 @@ class User
 public:
     // static bool exist; // singleton ??
     User(const std::string&, const std::string&);
-    // void retrieveFile();
+    // void retrieveFile(); // TODO
     template<typename T> void retrieveChat(absChat* chat)
     {
         std::map<std::string, std::string> mm {{"token", token}, {"dst", chat->getID()}};
