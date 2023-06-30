@@ -116,6 +116,7 @@ User::User(const string& username, const string& password)
     }
 
     this->token = res["token"];
+
 }
 
 void User::retrieveServer()
