@@ -112,21 +112,6 @@ User::User()
     // TODO file
 }
 
-User::User(const string& username, const string& password)
-{
-    this->username = username;
-    this->password = password;
-
-    Quer mm {{"username", username}, {"password", password}};
-    http_get("signup", mm);
-    json res = http_get("login", mm);
-    if(res["code"]!="200"){
-        throw runtime_error(res["message"]);
-    }
-
-    this->token = res["token"];
-}
-
 void User::retrieveServer()
 {
     Quer mm[3];
@@ -208,4 +193,3 @@ User::~User()
     for (auto& x:chats) delete x;
     // TODO add file
 }
->>>>>>> 467483785cb8397a818d6f1a45dce8d5c2cd70aa
