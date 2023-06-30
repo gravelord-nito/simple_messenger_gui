@@ -10,7 +10,6 @@ CONFIG += c++17
 
 SOURCES += \
     asly.cpp \
-    http/test.cpp \
     http/tools.cpp \
     main.cpp \
     mainwindow.cpp \

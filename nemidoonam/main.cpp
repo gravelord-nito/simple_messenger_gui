@@ -2,11 +2,11 @@
 #include"asly.h"
 #include <QApplication>
 #include"welcom.h"
-<<<<<<< HEAD
-=======
+//<<<<<<< HEAD
+//=======
 #include"http\tools.h"
 
->>>>>>> 07921016c62a76203c30120983549a95ed803b09
+//>>>>>>> 07921016c62a76203c30120983549a95ed803b09
 int main(int argc, char *argv[])
 {
     QApplication a(argc, argv);
