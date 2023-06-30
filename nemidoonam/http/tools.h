@@ -75,9 +75,11 @@ class User
 public:
     // static bool exist; // singleton ??
     User();
-    User(const std::string&, const std::string&);
     void retrieveServer();
     template<typename T> void retrieveChat(absChat* chat);
+
+    void signup(const std::string&, const std::string&);
+    void login(const std::string&, const std::string&);
 
     const std::string getToken();
     const std::string getUser();
