@@ -95,13 +95,22 @@ absChat::~absChat()
     for(auto x:messages) delete x;
 }
 
-Channel::Channel(const std::string& _id, User* crt)
-    : absChat(_id), admin_id(crt->getUser())
+void Channel::setAdmin(const string& id)
 {
-    crt->sendMessage<Channel>(crt->getUser(), this);
+    admin_id = id;
+}
+
+const string& Channel::getAdmin()
+{
+    return admin_id;
 }
 
 // Implementation of User class
+
+User::User()
+{
+    // TODO file
+}
 
 User::User(const string& username, const string& password)
 {
@@ -137,10 +146,10 @@ void User::retrieveServer()
                 retrieveChat<Chat>(new Chat(res["block " + to_string(i)]["src"]));
                 break;
             case 1:
-                retrieveChat<Group>(new Chat(res["block " + to_string(i)]["group_name"]));
+                retrieveChat<Group>(new Group(res["block " + to_string(i)]["group_name"]));
                 break;
             case 2:
-                retrieveChat<Channel>(new Chat(res["block " + to_string(i)]["channel_name"]));
+                retrieveChat<Channel>(new Channel(res["block " + to_string(i)]["channel_name"]));
                 break;
             }
         }
@@ -172,4 +181,9 @@ User::~User()
     Quer mm {{"username", username}, {"password", password}};
     http_get("logout", mm);
     for (auto& x:chats) delete x;
+<<<<<<< HEAD
 }
+=======
+    
+}
+>>>>>>> 467483785cb8397a818d6f1a45dce8d5c2cd70aa
