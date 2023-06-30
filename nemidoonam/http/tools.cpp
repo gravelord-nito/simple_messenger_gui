@@ -49,7 +49,7 @@ Message::Message(json jj)
 Message::Message(const string& body, const string& time, const string& src, const string& dst)
 {
     this->body = body;
-    this->date = date;
+    this->date = time;
     this->src = src;
     this->dst = dst;
 }
@@ -181,9 +181,9 @@ User::~User()
     Quer mm {{"username", username}, {"password", password}};
     http_get("logout", mm);
     for (auto& x:chats) delete x;
-<<<<<<< HEAD
-}
-=======
+//<<<<<<< HEAD
+
+//=======
     
 }
->>>>>>> 467483785cb8397a818d6f1a45dce8d5c2cd70aa
+//>>>>>>> 467483785cb8397a818d6f1a45dce8d5c2cd70aa
