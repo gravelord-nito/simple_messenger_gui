@@ -56,7 +56,6 @@ class Group: public absChat
 {
 public:
     Group(const std::string& _id): absChat(_id) {}
-    Group(const std::string& _id, User* crt): Group(_id) {}
     static std::string stringView() { return "group"; }
 };
 
@@ -64,8 +63,8 @@ class Channel: public absChat
 {
 public:
     Channel(const std::string& _id): absChat(_id) {}
-    Channel(const std::string& _id, const std::string& crt): absChat(_id), admin_id(crt) {}
-    Channel(const std::string& _id, User* crt);
+    void setAdmin(const std::string&);
+    const std::string& getAdmin();
     static std::string stringView() { return "channel"; }
 private:
     std::string admin_id;
@@ -79,7 +78,6 @@ class User
 public:
     // static bool exist; // singleton ??
     User(const std::string&, const std::string&);
-    // void retrieveFile(); // TODO
     template<typename T> void retrieveChat(absChat* chat)
     {
         std::map<std::string, std::string> mm {{"token", token}, {"dst", chat->getID()}};
@@ -96,6 +94,22 @@ public:
     std::vector<absChat*> getChats();
     void addChat(absChat*);
 
+    template<typename T> T* joinChannel(const std::string& id)
+    {
+        std::string s = T::stringView();
+
+        std::map<std::string, std::string> mm {{"token", token}, {s + "_name", id}};
+        nlohmann::json res = http_get("join" + s, mm);
+        if (res["code"]!="200"){
+            throw std::runtime_error(res["message"]);
+        }
+
+        T* new_chat = new T(id);
+        retrieveChat<T>(new_chat);
+        addChat(new_chat);
+        return new_chat;
+    }
+
     template<typename T> T* createChat(const std::string& id)
     {
         std::string s = T::stringView();
@@ -106,7 +120,11 @@ public:
             throw std::runtime_error(res["message"]);
         }
 
-        T* new_chat = new T(id, this);
+        T* new_chat = new T(id);
+        if (std::is_same<T, Channel>::value) {
+            sendMessage(username, T);
+            T->setAdmin(username);
+        }
         addChat(new_chat);
         return new_chat;
     }

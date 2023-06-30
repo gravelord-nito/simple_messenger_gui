@@ -95,10 +95,14 @@ absChat::~absChat()
     for(auto x:messages) delete x;
 }
 
-Channel::Channel(const std::string& _id, User* crt)
-    : absChat(_id), admin_id(crt->getUser())
+void Channel::setAdmin(const string& id)
 {
-    crt->sendMessage<Channel>(crt->getUser(), this);
+    admin_id = id;
+}
+
+const string& Channel::getAdmin()
+{
+    return admin_id;
 }
 
 // Implementation of User class
@@ -136,10 +140,10 @@ void User::retrieveServer()
                 retrieveChat<Chat>(new Chat(res["block " + to_string(i)]["src"]));
                 break;
             case 1:
-                retrieveChat<Group>(new Chat(res["block " + to_string(i)]["group_name"]));
+                retrieveChat<Group>(new Group(res["block " + to_string(i)]["group_name"]));
                 break;
             case 2:
-                retrieveChat<Channel>(new Chat(res["block " + to_string(i)]["channel_name"]));
+                retrieveChat<Channel>(new Channel(res["block " + to_string(i)]["channel_name"]));
                 break;
             }
         }
