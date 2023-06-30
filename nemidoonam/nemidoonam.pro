@@ -39,4 +39,4 @@ else: unix:!android: target.path = /opt/$${TARGET}/bin
 RESOURCES += \
     project-resource.qrc
 
-win32: LIBS += -lWS2_32
+win32: LIBS += -lWS2_32\

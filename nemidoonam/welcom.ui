@@ -218,7 +218,7 @@ color: rgb(255, 255, 255);</string>
             </widget>
            </item>
            <item>
-            <widget class="QLineEdit" name="lineEdit">
+            <widget class="QLineEdit" name="user">
              <property name="styleSheet">
               <string notr="true">border-radius:10px;</string>
              </property>
@@ -238,7 +238,7 @@ color: rgb(255, 255, 255);</string>
             </widget>
            </item>
            <item>
-            <widget class="QLineEdit" name="lineEdit_2">
+            <widget class="QLineEdit" name="pass">
              <property name="styleSheet">
               <string notr="true">border-top-left-radius:0px;
 border-bottom-right-radius:0px;
@@ -264,7 +264,8 @@ color: rgb(255, 255, 255);
 background: rgb(70, 30, 40,100);
 padding: 10px;
 border-radius:10px;
-}</string>
+}
+</string>
              </property>
              <property name="text">
               <string>login</string>
