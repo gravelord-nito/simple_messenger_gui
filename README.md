@@ -1,5 +1,5 @@
 # Messenger
-Simple messanger client in QT as the project of advanced programming university course at [IUT](https://english.iut.ac.ir/).
+Simple Object Oriented QT based messanger client as of final project of advanced programming university course at [IUT](https://english.iut.ac.ir/).
 
 You can find the list of all the requests possible in [All request and reply](https://github.com/gravelord-nito/messenger_skullking_4/blob/main/Messenger%20All%20request%20and%20reply%20format.pdf) pdf file.
 
