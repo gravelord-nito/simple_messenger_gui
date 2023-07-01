@@ -252,4 +252,3 @@ template<typename T> void loadChats(User* u) {
     }
     ifile.close();
 }
->>>>>>> 2904d5164a77223022678b4c8f84b8832fb88b31
