@@ -112,7 +112,7 @@ const string& Channel::getAdmin()
 template<typename T> void loadChats(User*);
 User::User()
 {
-    ifstream ifile("data.txt");
+    ifstream ifile("data/main.txt");
     if (!ifile.is_open() || ifile.eof()) {
         is_loggedin = 0;
         return;
@@ -153,6 +153,11 @@ void User::retrieveServer()
             }
         }
     }
+}
+
+bool User::isLoggedin()
+{
+    return is_loggedin;
 }
 
 void User::signup(const string& username, const string& password)
@@ -206,16 +211,14 @@ std::vector<absChat*> User::getChats()
 template<typename T> void saveChats(User*);
 User::~User()
 {
-    Quer mm {{"username", username}, {"password", password}};
-    http_get("logout", mm);
 
-    remove("main.txt");
-    remove("user.txt");
-    remove("group.txt");
-    remove("channel.txt");
+    remove("data/main.txt");
+    remove("data/user.txt");
+    remove("data/group.txt");
+    remove("data/channel.txt");
     if (!is_loggedin) return;
 
-    ofstream ofile("user.txt");
+    ofstream ofile("data/main.txt");
     ofile << token << ' ' << username << ' ' << password << '\n';
     ofile.close();
 
@@ -225,7 +228,7 @@ User::~User()
 }
 
 template<typename T> void saveChats(User* u) {
-    ofstream ofile(T::stringView() + ".txt");
+    ofstream ofile("data/" + T::stringView() + ".txt");
     for (auto c:u->getChats()) if(dynamic_cast<T*>(c) != NULL) {
         ofile << c->getID() << ' ' << c->messageNum() << '\n';
         for (auto m:c->getMessages()) {
@@ -236,19 +239,16 @@ template<typename T> void saveChats(User* u) {
 }
 
 template<typename T> void loadChats(User* u) {
-    absChat* c;
-    Message* m;
-    string id; 
-    int n;
-    ifstream ifile(T::stringView() + ".txt");
-    while (!ifile.eof()) {
-        ifile >> id >> n;
+    absChat* c; Message* m; string id; int n;
+    ifstream ifile("data/" + T::stringView() + ".txt");
+    while (ifile >> id >> n) {
         c = new T(id);
         while (n--) {
             m = new Message();
             ifile >> *m;
             c->addMessage(m);
         }
+        u->addChat(c);
     }
     ifile.close();
 }

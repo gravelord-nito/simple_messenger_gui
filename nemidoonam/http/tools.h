@@ -82,6 +82,7 @@ public:
     void retrieveServer();
     template<typename T> void retrieveChat(absChat* chat);
 
+    bool isLoggedin();
     void signup(const std::string&, const std::string&);
     void login(const std::string&, const std::string&);
     void logout();
