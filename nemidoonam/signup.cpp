@@ -25,9 +25,12 @@ void signup::on_pushButton_clicked()
 {
     QString pass=ui->pass->text();
     QString user=ui->username->text();
-    User us(user.toStdString(),pass.toStdString());
+     User* zz=new User ();
+    zz->signup(user.toStdString(),pass.toStdString());
     asly* asl=new class asly;
     asl->show();
+    asl->setuser(zz);
+    //asl->setuser();
     asl->setname(user);
     this->close();
 }

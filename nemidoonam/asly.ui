@@ -45,8 +45,8 @@
      </property>
      <property name="maximumSize">
       <size>
-       <width>0</width>
-       <height>0</height>
+       <width>2345432</width>
+       <height>1234321</height>
       </size>
      </property>
      <property name="sizeIncrement">
@@ -69,144 +69,251 @@ border-color: none;
      <property name="title">
       <string/>
      </property>
-     <widget class="QPushButton" name="pushButton_22">
-      <property name="geometry">
-       <rect>
-        <x>170</x>
-        <y>130</y>
-        <width>81</width>
-        <height>81</height>
-       </rect>
-      </property>
-      <property name="autoFillBackground">
-       <bool>false</bool>
-      </property>
-      <property name="styleSheet">
-       <string notr="true">background-color: rgb(249, 180, 255);
+     <layout class="QGridLayout" name="gridLayout_7">
+      <item row="6" column="2">
+       <spacer name="verticalSpacer">
+        <property name="orientation">
+         <enum>Qt::Vertical</enum>
+        </property>
+        <property name="sizeHint" stdset="0">
+         <size>
+          <width>20</width>
+          <height>40</height>
+         </size>
+        </property>
+       </spacer>
+      </item>
+      <item row="5" column="2">
+       <spacer name="verticalSpacer_2">
+        <property name="orientation">
+         <enum>Qt::Vertical</enum>
+        </property>
+        <property name="sizeHint" stdset="0">
+         <size>
+          <width>20</width>
+          <height>40</height>
+         </size>
+        </property>
+       </spacer>
+      </item>
+      <item row="4" column="2">
+       <widget class="QPushButton" name="gruop">
+        <property name="enabled">
+         <bool>true</bool>
+        </property>
+        <property name="minimumSize">
+         <size>
+          <width>50</width>
+          <height>50</height>
+         </size>
+        </property>
+        <property name="styleSheet">
+         <string notr="true">border-radius:7px;
+background-color: rgb(201, 209, 213);
+TextMargins:2px;
+padding-left:4px;
+font: 900 9pt &quot;Segoe UI Black&quot;;</string>
+        </property>
+        <property name="text">
+         <string>creat group</string>
+        </property>
+        <property name="flat">
+         <bool>true</bool>
+        </property>
+       </widget>
+      </item>
+      <item row="0" column="2">
+       <spacer name="horizontalSpacer_6">
+        <property name="orientation">
+         <enum>Qt::Horizontal</enum>
+        </property>
+        <property name="sizeHint" stdset="0">
+         <size>
+          <width>40</width>
+          <height>20</height>
+         </size>
+        </property>
+       </spacer>
+      </item>
+      <item row="1" column="2">
+       <spacer name="verticalSpacer_6">
+        <property name="orientation">
+         <enum>Qt::Vertical</enum>
+        </property>
+        <property name="sizeHint" stdset="0">
+         <size>
+          <width>20</width>
+          <height>40</height>
+         </size>
+        </property>
+       </spacer>
+      </item>
+      <item row="3" column="3">
+       <spacer name="horizontalSpacer_10">
+        <property name="orientation">
+         <enum>Qt::Horizontal</enum>
+        </property>
+        <property name="sizeHint" stdset="0">
+         <size>
+          <width>40</width>
+          <height>20</height>
+         </size>
+        </property>
+       </spacer>
+      </item>
+      <item row="2" column="1">
+       <spacer name="horizontalSpacer_8">
+        <property name="orientation">
+         <enum>Qt::Horizontal</enum>
+        </property>
+        <property name="sizeHint" stdset="0">
+         <size>
+          <width>40</width>
+          <height>20</height>
+         </size>
+        </property>
+       </spacer>
+      </item>
+      <item row="3" column="1">
+       <spacer name="horizontalSpacer_7">
+        <property name="orientation">
+         <enum>Qt::Horizontal</enum>
+        </property>
+        <property name="sizeHint" stdset="0">
+         <size>
+          <width>40</width>
+          <height>20</height>
+         </size>
+        </property>
+       </spacer>
+      </item>
+      <item row="4" column="1">
+       <widget class="QPushButton" name="chanel">
+        <property name="enabled">
+         <bool>true</bool>
+        </property>
+        <property name="minimumSize">
+         <size>
+          <width>50</width>
+          <height>50</height>
+         </size>
+        </property>
+        <property name="styleSheet">
+         <string notr="true">border-radius:7px;
+background-color: rgb(201, 209, 213);
+TextMargins:2px;
+padding-left:4px;
+font: 900 9pt &quot;Segoe UI Black&quot;;</string>
+        </property>
+        <property name="text">
+         <string>creat chanel</string>
+        </property>
+        <property name="flat">
+         <bool>true</bool>
+        </property>
+       </widget>
+      </item>
+      <item row="2" column="3">
+       <spacer name="horizontalSpacer_9">
+        <property name="orientation">
+         <enum>Qt::Horizontal</enum>
+        </property>
+        <property name="sizeHint" stdset="0">
+         <size>
+          <width>40</width>
+          <height>20</height>
+         </size>
+        </property>
+       </spacer>
+      </item>
+      <item row="2" column="2">
+       <widget class="QPushButton" name="pushButton_22">
+        <property name="minimumSize">
+         <size>
+          <width>80</width>
+          <height>120</height>
+         </size>
+        </property>
+        <property name="maximumSize">
+         <size>
+          <width>120</width>
+          <height>16777215</height>
+         </size>
+        </property>
+        <property name="autoFillBackground">
+         <bool>false</bool>
+        </property>
+        <property name="styleSheet">
+         <string notr="true">background-color: rgb(249, 180, 255);
 background: rgb(44, 227, 255);
 border-radius:40px;
 </string>
-      </property>
-      <property name="text">
-       <string/>
-      </property>
-      <property name="flat">
-       <bool>true</bool>
-      </property>
-     </widget>
-     <widget class="QPushButton" name="back">
-      <property name="geometry">
-       <rect>
-        <x>20</x>
-        <y>20</y>
-        <width>51</width>
-        <height>41</height>
-       </rect>
-      </property>
-      <property name="minimumSize">
-       <size>
-        <width>51</width>
-        <height>41</height>
-       </size>
-      </property>
-      <property name="maximumSize">
-       <size>
-        <width>51</width>
-        <height>41</height>
-       </size>
-      </property>
-      <property name="text">
-       <string>back</string>
-      </property>
-      <property name="icon">
-       <iconset>
-        <normaloff>:/hi-def/arrowleft.png</normaloff>:/hi-def/arrowleft.png</iconset>
-      </property>
-     </widget>
-     <widget class="QLineEdit" name="esmsh">
-      <property name="geometry">
-       <rect>
-        <x>120</x>
-        <y>240</y>
-        <width>191</width>
-        <height>41</height>
-       </rect>
-      </property>
-      <property name="styleSheet">
-       <string notr="true">border-radius:7px;
+        </property>
+        <property name="text">
+         <string/>
+        </property>
+        <property name="flat">
+         <bool>true</bool>
+        </property>
+       </widget>
+      </item>
+      <item row="3" column="2">
+       <widget class="QLineEdit" name="esmsh">
+        <property name="minimumSize">
+         <size>
+          <width>200</width>
+          <height>20</height>
+         </size>
+        </property>
+        <property name="styleSheet">
+         <string notr="true">border-radius:7px;
 background-color: rgb(201, 209, 213);
 TextMargins:2px;
 padding-left:4px;
 font: 900 9pt &quot;Segoe UI Black&quot;;</string>
-      </property>
-      <property name="placeholderText">
-       <string>Enter a name</string>
-      </property>
-     </widget>
-     <widget class="QPushButton" name="gruop">
-      <property name="enabled">
-       <bool>true</bool>
-      </property>
-      <property name="geometry">
-       <rect>
-        <x>220</x>
-        <y>340</y>
-        <width>141</width>
-        <height>81</height>
-       </rect>
-      </property>
-      <property name="minimumSize">
-       <size>
-        <width>0</width>
-        <height>15</height>
-       </size>
-      </property>
-      <property name="styleSheet">
-       <string notr="true">border-radius:7px;
-background-color: rgb(201, 209, 213);
-TextMargins:2px;
-padding-left:4px;
-font: 900 9pt &quot;Segoe UI Black&quot;;</string>
-      </property>
-      <property name="text">
-       <string>creat group</string>
-      </property>
-      <property name="flat">
-       <bool>true</bool>
-      </property>
-     </widget>
-     <widget class="QPushButton" name="chanel">
-      <property name="enabled">
-       <bool>true</bool>
-      </property>
-      <property name="geometry">
-       <rect>
-        <x>60</x>
-        <y>340</y>
-        <width>141</width>
-        <height>81</height>
-       </rect>
-      </property>
-      <property name="minimumSize">
-       <size>
-        <width>0</width>
-        <height>15</height>
-       </size>
-      </property>
-      <property name="styleSheet">
-       <string notr="true">border-radius:7px;
-background-color: rgb(201, 209, 213);
-TextMargins:2px;
-padding-left:4px;
-font: 900 9pt &quot;Segoe UI Black&quot;;</string>
-      </property>
-      <property name="text">
-       <string>creat chanel</string>
-      </property>
-      <property name="flat">
-       <bool>true</bool>
-      </property>
-     </widget>
+        </property>
+        <property name="placeholderText">
+         <string>Enter a name</string>
+        </property>
+       </widget>
+      </item>
+      <item row="4" column="0">
+       <spacer name="horizontalSpacer_11">
+        <property name="orientation">
+         <enum>Qt::Horizontal</enum>
+        </property>
+        <property name="sizeHint" stdset="0">
+         <size>
+          <width>40</width>
+          <height>20</height>
+         </size>
+        </property>
+       </spacer>
+      </item>
+      <item row="0" column="1">
+       <widget class="QPushButton" name="back">
+        <property name="minimumSize">
+         <size>
+          <width>51</width>
+          <height>41</height>
+         </size>
+        </property>
+        <property name="maximumSize">
+         <size>
+          <width>51</width>
+          <height>41</height>
+         </size>
+        </property>
+        <property name="text">
+         <string>back</string>
+        </property>
+        <property name="icon">
+         <iconset>
+          <normaloff>:/hi-def/arrowleft.png</normaloff>:/hi-def/arrowleft.png</iconset>
+        </property>
+       </widget>
+      </item>
+     </layout>
     </widget>
    </item>
    <item>
@@ -462,7 +569,7 @@ border-color: none;
      <property name="title">
       <string/>
      </property>
-     <layout class="QVBoxLayout" name="verticalLayout_4" stretch="0,2,2,2,2,2">
+     <layout class="QVBoxLayout" name="verticalLayout_4" stretch="0,2,2,2,2,0">
       <property name="spacing">
        <number>0</number>
       </property>
@@ -609,7 +716,7 @@ background-color: rgb(255, 248, 193);</string>
        </widget>
       </item>
       <item>
-       <widget class="QPushButton" name="pushButton_13">
+       <widget class="QPushButton" name="sakht">
         <property name="minimumSize">
          <size>
           <width>0</width>
@@ -635,12 +742,12 @@ QPushButton::hover
 }</string>
         </property>
         <property name="text">
-         <string>new group</string>
+         <string>new channel or group</string>
         </property>
        </widget>
       </item>
       <item>
-       <widget class="QPushButton" name="pushButton_10">
+       <widget class="QPushButton" name="logout">
         <property name="minimumSize">
          <size>
           <width>0</width>
@@ -666,7 +773,7 @@ QPushButton::hover
 }</string>
         </property>
         <property name="text">
-         <string>contacts</string>
+         <string>logout</string>
         </property>
        </widget>
       </item>
@@ -702,37 +809,6 @@ QPushButton::hover
        </widget>
       </item>
       <item>
-       <widget class="QPushButton" name="pushButton_12">
-        <property name="minimumSize">
-         <size>
-          <width>0</width>
-          <height>0</height>
-         </size>
-        </property>
-        <property name="styleSheet">
-         <string notr="true">QPushButton{
-	
-font: 700 10pt &quot;Segoe UI&quot;;
-font: 600 11pt &quot;Segoe UI&quot;;
-	color: rgb(255, 255, 255);
-background: rgb(70, 30, 40,0);
-border-radius:15px;
-border-radius:10px;
-background-color: rgb(201, 209, 213,0);
-	font: 900 9pt &quot;Segoe UI Black&quot;;
-
-}
-QPushButton::hover
-{
-
-}</string>
-        </property>
-        <property name="text">
-         <string>new chanel</string>
-        </property>
-       </widget>
-      </item>
-      <item>
        <widget class="QPushButton" name="pushButton_14">
         <property name="minimumSize">
          <size>
@@ -760,6 +836,37 @@ QPushButton::hover
         </property>
         <property name="text">
          <string>profile</string>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <widget class="QPushButton" name="pushButton_12">
+        <property name="minimumSize">
+         <size>
+          <width>0</width>
+          <height>0</height>
+         </size>
+        </property>
+        <property name="styleSheet">
+         <string notr="true">QPushButton{
+	
+font: 700 10pt &quot;Segoe UI&quot;;
+font: 600 11pt &quot;Segoe UI&quot;;
+	color: rgb(255, 255, 255);
+background: rgb(70, 30, 40,0);
+border-radius:15px;
+border-radius:10px;
+background-color: rgb(201, 209, 213,0);
+	font: 900 9pt &quot;Segoe UI Black&quot;;
+
+}
+QPushButton::hover
+{
+
+}</string>
+        </property>
+        <property name="text">
+         <string/>
         </property>
        </widget>
       </item>
@@ -941,7 +1048,7 @@ border-color: none;</string>
           <rect>
            <x>0</x>
            <y>0</y>
-           <width>285</width>
+           <width>211</width>
            <height>572</height>
           </rect>
          </property>
@@ -1120,7 +1227,7 @@ color: rgb(255, 255, 255);</string>
           <rect>
            <x>0</x>
            <y>0</y>
-           <width>849</width>
+           <width>627</width>
            <height>512</height>
           </rect>
          </property>

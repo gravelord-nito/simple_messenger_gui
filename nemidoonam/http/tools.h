@@ -101,7 +101,7 @@ private:
     std::string token;
     std::string username;
     std::string password;
-    std::vector<absChat*> chats; // change it to set??
+    std::vector<absChat*> chats; // change it to set??noooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooo
 };
 
 template<typename T> void User::retrieveChat(absChat* chat)
