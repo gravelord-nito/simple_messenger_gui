@@ -51,7 +51,7 @@ Message::Message(json jj)
 Message::Message(const string& body, const string& time, const string& src, const string& dst)
 {
     this->body = body;
-    this->date = date;
+    this->date = time;
     this->src = src;
     this->dst = dst;
 }
@@ -252,3 +252,4 @@ template<typename T> void loadChats(User* u) {
     }
     ifile.close();
 }
+>>>>>>> 2904d5164a77223022678b4c8f84b8832fb88b31

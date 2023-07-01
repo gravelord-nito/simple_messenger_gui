@@ -17,7 +17,7 @@ public:
 void setname(QString nam){name=nam;}
 private slots:
     void on_pushButton_2_clicked();
-    void on_contact_clicked();
+    void on_contact_clicked(QString id);
     void on_safejadid_clicked();
 
     void on_pushButton_16_clicked();
@@ -30,16 +30,23 @@ private slots:
 
 
 
+
+
+    void on_send_clicked();
+    void setuser(User* z){user=z;}
+    void on_serchtxt_textChanged(const QString &arg1);
+
     void on_doserch_clicked();
 
-    void on_safejadid_2_clicked();
+    void on_chanel_clicked();
 
-    void on_doserch_2_clicked();
+    void on_gruop_clicked();
 
 private:
-    std::vector<Message>contact;
-    void showcontact();
-    void show_messeg(std::vector<Message> messeges);
+    User* user;
+    std::vector<absChat*>contact;
+    void showcontact(std::vector<absChat*>ser);
+    void show_messeg(std::vector<Message*> messeges);
     QString name;
     Ui::asly *ui;
 };
