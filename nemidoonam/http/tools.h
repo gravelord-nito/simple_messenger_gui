@@ -24,9 +24,13 @@ struct Message
     std::string date;
     std::string src;
     std::string dst;
-    Message() = delete;
+    Message() {}
     Message(nlohmann::json);
     Message(const std::string&, const std::string&, const std::string&, const std::string&);
+    friend std::istream& operator>>(std::istream& input, Message& obj) {
+        input >> obj.body >> obj.date >> obj.src >> obj.dst;
+        return input;
+    }
 };
 
 class absChat
@@ -67,7 +71,7 @@ public:
     const std::string& getAdmin();
     static std::string stringView() { return "channel"; }
 private:
-    std::string admin_id;
+    std::string admin_id; // server doesn't support lol
 };
 
 class User
@@ -80,6 +84,7 @@ public:
 
     void signup(const std::string&, const std::string&);
     void login(const std::string&, const std::string&);
+    void logout();
 
     const std::string getToken();
     const std::string getUser();
@@ -92,6 +97,7 @@ public:
 
     ~User();
 private:
+    bool is_loggedin;
     std::string token;
     std::string username;
     std::string password;

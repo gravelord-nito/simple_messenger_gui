@@ -1,6 +1,8 @@
 #include <string.h>
-#include <chrono>
-#include <thread>
+#include <winsock2.h>
+#include <windows.h>
+#include <fstream>
+#include <cstdio>
 #include "tools.h"
 
 #define Quer map<string, string>
@@ -22,7 +24,7 @@ json http_get(const string& command, Quer& queries)
         return jres;
     } catch (const exception& e) {
         cerr << "Failed: http request failed, error: " << e.what() << endl;
-        this_thread::sleep_for(chrono::milliseconds(5000));
+        Sleep(5);
         return http_get(command, queries);
     } 
 }
@@ -107,9 +109,22 @@ const string& Channel::getAdmin()
 
 // Implementation of User class
 
+template<typename T> void loadChats(User*);
 User::User()
 {
-    // TODO file
+    ifstream ifile("data.txt");
+    if (!ifile.is_open() || ifile.eof()) {
+        is_loggedin = 0;
+        return;
+    }
+
+    is_loggedin = 1;
+    ifile >> token >> username >> password;
+    ifile.close();
+
+    loadChats<Chat>(this);
+    loadChats<Group>(this);
+    loadChats<Channel>(this);
 }
 
 void User::retrieveServer()
@@ -140,30 +155,32 @@ void User::retrieveServer()
     }
 }
 
-void User::signup(const string&, const string&)
+void User::signup(const string& username, const string& password)
 {
-    this->username = username;
-    this->password = password;
-
     Quer mm {{"command", "signup"}, {"username", username}, {"password", password}};
     json res = http_get(mm);
-    if(res["code"]!="200"){
-        throw runtime_error(res["message"]);
-    }
-    this->token = res["token"];
+    if(res["code"]!="200") throw runtime_error(res["message"]);
+    login(username, password);
 }
 
-void User::login(const string&, const string&)
+void User::login(const string& username, const string& password)
 {
+    is_loggedin = 1;
+    Quer mm {{"command", "login"}, {"username", username}, {"password", password}}; 
+    json res = http_get(mm);
+    if(res["code"]!="200") throw runtime_error(res["message"]);
+    this->token = res["token"];
     this->username = username;
     this->password = password;
+}
 
-    Quer mm {{"command", "login"}, {"username", username}, {"password", password}};
+void User::logout()
+{
+    is_loggedin = 0;
+    Quer mm {{"command", "logout"}, {"username", username}, {"password", password}};
     json res = http_get(mm);
-    if(res["code"]!="200"){
-        throw runtime_error(res["message"]);
-    }
-    this->token = res["token"];
+    if(res["code"]!="200") throw runtime_error(res["message"]);
+    for (auto x:chats) delete x;
 }
 
 const string User::getToken()
@@ -186,10 +203,52 @@ std::vector<absChat*> User::getChats()
     return chats;
 }
 
+template<typename T> void saveChats(User*);
 User::~User()
 {
     Quer mm {{"username", username}, {"password", password}};
     http_get("logout", mm);
-    for (auto& x:chats) delete x;
-    // TODO add file
+
+    remove("main.txt");
+    remove("user.txt");
+    remove("group.txt");
+    remove("channel.txt");
+    if (!is_loggedin) return;
+
+    ofstream ofile("user.txt");
+    ofile << token << ' ' << username << ' ' << password << '\n';
+    ofile.close();
+
+    saveChats<Chat>(this);
+    saveChats<Group>(this);
+    saveChats<Channel>(this);
+}
+
+template<typename T> void saveChats(User* u) {
+    ofstream ofile(T::stringView() + ".txt");
+    for (auto c:u->getChats()) if(dynamic_cast<T*>(c) != NULL) {
+        ofile << c->getID() << ' ' << c->messageNum() << '\n';
+        for (auto m:c->getMessages()) {
+            ofile << m->body << ' ' << m->date << ' ' << m->src << ' ' << m->dst << '\n';
+        }
+    }
+    ofile.close();
+}
+
+template<typename T> void loadChats(User* u) {
+    absChat* c;
+    Message* m;
+    string id; 
+    int n;
+    ifstream ifile(T::stringView() + ".txt");
+    while (!ifile.eof()) {
+        ifile >> id >> n;
+        c = new T(id);
+        while (n--) {
+            m = new Message();
+            ifile >> *m;
+            c->addMessage(m);
+        }
+    }
+    ifile.close();
 }
