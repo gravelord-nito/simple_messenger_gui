@@ -9,13 +9,13 @@ MainWindow::MainWindow(QWidget *parent)
 {
     ui->setupUi(this);
     User*zz=new User;
-    if(zz->isLoggedin()==1){
+    if(zz->isLoggedin()==0){
         welcom* z=new welcom;
                 z->show();
 
 
      }
-    else if(zz->isLoggedin()==0){
+    else if(zz->isLoggedin()==1){
         asly* asl=new asly;
 
 

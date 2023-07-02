@@ -35,7 +35,7 @@ private slots:
     void on_pushButton_14_clicked();
 
     void on_pushButton_20_clicked();
-
+    void newmessegs();
 
 
 
@@ -66,6 +66,7 @@ private:
     void show_messeg(std::vector<nlohmann::json> messeges);
     QString name;
     Ui::asly *ui;
+    QTimer* timer;
 };
 
 #endif // ASLY_H
