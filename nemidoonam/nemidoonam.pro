@@ -40,3 +40,6 @@ RESOURCES += \
     project-resource.qrc
 
 win32: LIBS += -lWS2_32\
+
+DISTFILES += \
+    http/data.txt
