@@ -10,9 +10,10 @@
 using namespace std;
 using json = nlohmann::json;
 
+const string Src[] = {"src", "group_name", "channel_name"};
+const string Stype[] = {"user", "group", "channel"};
 
-json http_get(const string& command, Quer& queries)
-{
+json http_get(const string& command, Quer& queries) {
     string url = "http://api.barafardayebehtar.ml:8080/";
     url += command + '?';
     for (auto const& [key, val] : queries) if(key != "command") url += key + '=' + val + '&';
@@ -21,234 +22,116 @@ json http_get(const string& command, Quer& queries)
         cerr << "GET request: " << url << endl;
         json jres = json::parse(http::Request(url).send("GET").body);
         cerr << "Success: " << jres << endl;
+        if (jres["code"]!="200") throw runtime_error(jres["message"]);
         return jres;
     } catch (const exception& e) {
         cerr << "Failed: http request failed, error: " << e.what() << endl;
-        Sleep(5);
+        return json();
+        Sleep(5000);
         return http_get(command, queries);
     } 
 }
 
-json http_get(Quer& queries)
-{
+json http_get(Quer& queries) {
     if(queries.find("command") == queries.end()) {
         throw invalid_argument("invalid http request: command not defined");
     }
     return http_get(queries["command"], queries);
 }
 
-
-// Implemenation of Message class
-
-Message::Message(json jj)
-{
-    this->body = jj["body"];
-    this->date = jj["date"];
-    this->src = jj["src"];
-    this->dst = jj["dst"];
-}
-
-Message::Message(const string& body, const string& time, const string& src, const string& dst)
-{
-    this->body = body;
-    this->date = time;
-    this->src = src;
-    this->dst = dst;
-}
-
-
-// Implementation of Chat classes
-
-int absChat::messageNum() const
-{
-    return messages.size();
-}
-
-vector<Message*> absChat::getMessages()
-{
-    return messages;
-}
-
-void absChat::addMessage(Message* message)
-{
-    messages.emplace_back(message);
-}
-
-const string absChat::getID() const
-{
-    return id;
-}
-
-void absChat::setID(const string& id)
-{
-    this->id = id;
-}
-
-bool absChat::operator<(const absChat& rval)
-{
-    int n1 = this->messageNum();
-    int n2 = rval.messageNum();
-    if (n1+n2== 0) return 0;
-    return (this->messages)[n1-1]->date < (rval.messages)[n2-1]->date;
-}
-
-absChat::~absChat() 
-{
-    for(auto x:messages) delete x;
-}
-
-void Channel::setAdmin(const string& id)
-{
-    admin_id = id;
-}
-
-const string& Channel::getAdmin()
-{
-    return admin_id;
-}
-
-// Implementation of User class
-
-template<typename T> void loadChats(User*);
-User::User()
-{
-    ifstream ifile("data/main.txt");
+User::User() {
+    ifstream ifile("data.txt");
     if (!ifile.is_open() || ifile.eof()) {
         is_loggedin = 0;
+        ifile.close();
         return;
     }
 
     is_loggedin = 1;
+    string id; int ty, n; json jj;
     ifile >> token >> username >> password;
+    while (ifile >> id >> ty >> n)for (int i=0;i<n;i++) { ifile >> jj; chats[make_pair(id, (type)ty)].push_back(jj); }
     ifile.close();
-
-    loadChats<Chat>(this);
-    loadChats<Group>(this);
-    loadChats<Channel>(this);
 }
 
-void User::retrieveServer()
-{
-    Quer mm[3];
-    mm[0] = {{"command", "getuserlist"}, {"token", token}};
-    mm[1] = {{"command", "getgrouplist"}, {"token", token}};
-    mm[2] = {{"command", "getchannellist"}, {"token", token}};
-    for(auto i:{0,1,2}) {
-        json res = http_get(mm[i]);
-        if (res["code"] != "200") {
-            throw runtime_error("unecpected error");
-        }
-        for (int j=2;j<res.size();j++) {
-            switch (i)
-            {
-            case 0:
-                retrieveChat<Chat>(new Chat(res["block " + to_string(i)]["src"]));
-                break;
-            case 1:
-                retrieveChat<Group>(new Group(res["block " + to_string(i)]["group_name"]));
-                break;
-            case 2:
-                retrieveChat<Channel>(new Channel(res["block " + to_string(i)]["channel_name"]));
-                break;
-            }
-        }
+void User::retrieveChat(const std::pair<std::string, type>& p) {
+    string date = "00000000000000";
+    if (chats.find(p) != chats.end()) {
+        string last = chats[p].back()["date"];
+        date = last.substr(0,4) + last.substr(5,2) + last.substr(8,2) + last.substr(11,2) + last.substr(14,2) + last.substr(17,2);
+    }
+    Quer mm {{"command", "get" + Stype[p.second] + "chats"}, {"dst", p.first}, {"date", date}, {"token", token}};
+    json res = http_get(mm);
+    int i = 0;
+    if (chats.find(p) != chats.end()) i = chats[p].size();
+    while (res["block " + to_string(i)] != nullptr) {
+        chats[p].push_back(res["block " + to_string(i++)]);
     }
 }
 
-bool User::isLoggedin()
-{
-    return is_loggedin;
+void User::retrieveServer() {
+    for (auto i:{0,1,2}) {
+        Quer mm {{"command", "get" + Stype[i] + "list"}, {"token", token}};
+        json res = http_get(mm);
+        for (int j = 0 ; j < res.size() - 2; j++) retrieveChat(make_pair((string)res["block " + to_string(j)][Src[i]], (type)i));
+    }
 }
 
-void User::signup(const string& username, const string& password)
-{
-    Quer mm {{"command", "signup"}, {"username", username}, {"password", password}};
-    json res = http_get(mm);
-    if(res["code"]!="200") throw runtime_error(res["message"]);
+bool User::isLoggedin() { return is_loggedin; }
+
+void User::signup(const string& username, const string& password) {
+    Quer mm {{"command", "signup"}, {"username", username}, {"password", password}}; 
+    http_get(mm);
     login(username, password);
 }
 
-void User::login(const string& username, const string& password)
-{
+void User::login(const string& username, const string& password) {
     is_loggedin = 1;
     Quer mm {{"command", "login"}, {"username", username}, {"password", password}}; 
-    json res = http_get(mm);
-    if(res["code"]!="200") throw runtime_error(res["message"]);
-    this->token = res["token"];
+    this->token = http_get(mm)["token"];
     this->username = username;
     this->password = password;
 }
 
-void User::logout()
-{
+void User::logout() {
     is_loggedin = 0;
-    Quer mm {{"command", "logout"}, {"username", username}, {"password", password}};
-    json res = http_get(mm);
-    if(res["code"]!="200") throw runtime_error(res["message"]);
-    for (auto x:chats) delete x;
+    Quer mm {{"command", "logout"}, {"username", username}, {"password", password}}; 
+    http_get(mm);
 }
 
-const string User::getToken()
-{
-    return token;
+const string User::getToken() { return token; }
+
+const string User::getUser() { return username; }
+
+map<pair<string, User::type>, vector<json>> User::getChats() { return chats; }
+
+void User::joinChat(const std::pair<std::string, type>& p) {
+    Quer mm {{"command", "join" + Stype[p.second]}, {"token", token}};
+    http_get(mm);
+    retrieveChat(p);
 }
 
-const string User::getUser()
-{
-    return username;
+void User::createChat(const std::pair<std::string, type>& p) {
+    Quer mm {{"command", "create" + Stype[p.second]}, {Stype[p.second] + "_name", p.first}, {"token", token}};
+    http_get(mm);
+    chats[p] = vector<json>();
 }
 
-void User::addChat(absChat* chat) 
-{
-    chats.emplace_back(chat);
+void User::sendMessage(const std::string& body, const std::pair<std::string, type>& p) {
+    Quer mm {{"command", "sendmessage" + Stype[p.second]}, {"body", body}, {"dst", p.first}, {"token", token}};
+    http_get(mm);
+    retrieveChat(p);
 }
 
-std::vector<absChat*> User::getChats()
-{
-    return chats;
-}
 
-template<typename T> void saveChats(User*);
-User::~User()
-{
-
-    remove("data/main.txt");
-    remove("data/user.txt");
-    remove("data/group.txt");
-    remove("data/channel.txt");
+User::~User() {
+    remove("data.txt");
     if (!is_loggedin) return;
 
-    ofstream ofile("data/main.txt");
+    ofstream ofile("data.txt");
     ofile << token << ' ' << username << ' ' << password << '\n';
-    ofile.close();
-
-    saveChats<Chat>(this);
-    saveChats<Group>(this);
-    saveChats<Channel>(this);
-}
-
-template<typename T> void saveChats(User* u) {
-    ofstream ofile("data/" + T::stringView() + ".txt");
-    for (auto c:u->getChats()) if(dynamic_cast<T*>(c) != NULL) {
-        ofile << c->getID() << ' ' << c->messageNum() << '\n';
-        for (auto m:c->getMessages()) {
-            ofile << m->body << ' ' << m->date << ' ' << m->src << ' ' << m->dst << '\n';
-        }
+    for (auto const& [id, messages] : chats) {
+        ofile << id.first << ' ' << id.second << ' ' << messages.size() << '\n';
+        for (auto const& m : messages) ofile << m << '\n';
     }
-    ofile.close();
-}
-
-template<typename T> void loadChats(User* u) {
-    absChat* c; Message* m; string id; int n;
-    ifstream ifile("data/" + T::stringView() + ".txt");
-    while (ifile >> id >> n) {
-        c = new T(id);
-        while (n--) {
-            m = new Message();
-            ifile >> *m;
-            c->addMessage(m);
-        }
-        u->addChat(c);
-    }
-    ifile.close();
 }
