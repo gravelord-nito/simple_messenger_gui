@@ -15,13 +15,12 @@ class asly : public QDialog
 public:
     void clearLayout(QLayout* layout, bool deleteWidgets = true);
     void RemoveLayout (QWidget* widget);
-    void showcontact(std::vector<absChat*>ser);
-    Message* make_messege(QString mass,QString csrc){
+    void showcontact();
+    void make_messege(QString mass,QString csrc){
         QTime* QTime=new  class QTime;
         QString time=QString::number(QTime->hour())+":";QString::number(QTime->second());
         QString src=name;
-        Message* payam=new Message(mass.toStdString(),time.toStdString(),src.toStdString(),csrc.toStdString());
-        return payam;
+
     }
     explicit asly(QWidget *parent = nullptr);
     ~asly();
@@ -59,11 +58,12 @@ private slots:
 
     void on_back_clicked();
 
+    void on_jgroup_clicked();
+
 private:
     User* user;
-    std::vector<absChat*>contact;
 
-    void show_messeg(std::vector<Message*> messeges);
+    void show_messeg(std::vector<nlohmann::json> messeges);
     QString name;
     Ui::asly *ui;
 };

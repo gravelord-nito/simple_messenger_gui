@@ -14,57 +14,61 @@ asly::asly(QWidget *parent) :
 
 void asly::on_contact_clicked(QString id){int j=0; int iz;
        if(ui->serchtxt->text().toStdString()!=""){
-           ui->serchtxt->clear();
-           for(iz=user->getChats().size();iz!=0;iz--){
+           try{
+               user->sendMessage("a",std::pair(ui->serchtxt->text().toStdString(),user->type::user));
 
-               if(user->getChats()[iz]->getID()==id.toStdString()){
-                   //user->addChat();
-               show_messeg(user->getChats()[iz]->getMessages());   ui->username->setText(QString::fromStdString(user->getChats()[iz]->getID()));
-               break;
-               }
+               show_messeg(user->getChats()[std::pair(ui->serchtxt->text().toStdString(),user->type::user)]);
+
+               ui->serchtxt->clear();
+
+           }
+            catch (...) {
+           ui->serchtxt->setText("dorosteshkon");
            }
        }
 
-       else{
-       for(iz=user->getChats().size();iz!=0;iz--){
 
-           if(user->getChats()[iz]->getID()==id.toStdString()){
-           show_messeg(user->getChats()[iz]->getMessages());
-           break;
-           }
-       }
-       }
-    if(dynamic_cast<Chat*>(user->getChats()[iz])!=NULL){
+
+    std::map<std::pair<std::string, User::type>, std::vector<nlohmann::json>>::iterator it;
+    for (it=user->getChats().begin();it!=user->getChats().end();it++){
+        if(it->first.first==id.toStdString())
+            break;
+    }
+    if(it!=user->getChats().end()){
+    if(it->first.second==User::type::user){
+        show_messeg(it->second);
     ui->type->show();
     ui->user->show();
 
     }
-    if(dynamic_cast<Group*>(user->getChats()[iz])!=NULL){
+    if(it->second==User::type::channel){
+            show_messeg(it->second);
     ui->type->show();
     ui->user->show();
 
     }
-    if(dynamic_cast<Channel*>(user->getChats()[iz])!=NULL){
-        Channel* temp=dynamic_cast<Channel*>(user->getChats()[iz]);
-        if(temp->getMessages()[0]->src==name.toStdString())
+    if(it->second==User::type::group){
+       show_messeg(it->second);
+        if(std::string(it->second[0]["src"])==name.toStdString())
     ui->type->show();
     ui->user->show();
 
     }
+     ui->username->setText(QString::fromStdString(it->first.first));
     std::vector<QPushButton* > contacts;
     //this->show_messeg(messeges);
-    std::vector<QPushButton>::iterator it;
+
   //  for(it=contact.begin();it!=contact.end();it++){j++;
   //      if(it==sender())
   //   break;
-   // }
+   }
+   }
 
-}
-void asly::showcontact(std::vector<absChat*>ser){ std::vector<QPushButton* > contacts;
+void asly::showcontact(){ std::vector<QPushButton* > contacts;
      //qDeleteAll(ui->contactgroup->findChildren<QWidget *>(QString(), Qt::FindDirectChildrenOnly));
      //qDeleteAll(ui->contactgroup->findChildren<QBoxLayout *>(QString(), Qt::FindDirectChildrenOnly));
     // clearLayout( ui->contactgroup->layout(),true);
-       RemoveLayout(ui->contactgroup);
+      RemoveLayout(ui->contactgroup);
                                                    QVBoxLayout *Lay = NULL;
       Lay = new QVBoxLayout;
  QSpacerItem* horizSpacer=NULL;
@@ -72,7 +76,8 @@ void asly::showcontact(std::vector<absChat*>ser){ std::vector<QPushButton* > con
      //Lay->addSpacerItem(horizSpacer);
      this->ui->scrollArea->setWidgetResizable(true);
      //this->ui->scrollArea->setWidget(this->ui->contactgroup);
-     for (int j=0;j<int(ser.size());j++){
+     std::map<std::pair<std::string, User::type>, std::vector<nlohmann::json>>::iterator it;
+     for (it=user->getChats().begin();it!=user->getChats().end();it++){
 
 
     QHBoxLayout *Lay2 =NULL;
@@ -94,10 +99,10 @@ void asly::showcontact(std::vector<absChat*>ser){ std::vector<QPushButton* > con
                       "color: rgb(255, 255, 255);");
     esm->setStyleSheet("background-color: rgb(120, 255, 140);"
                        );
-    esm->setText(QString::fromStdString(ser[j]->getID()));
-    esm->setFlat(false);
-    ax->setFlat(true);
-    ax->setDisabled(true);
+    esm->setText(QString::fromStdString(it->first.first));
+    //esm->setFlat();
+    //ax->setFlat(true);
+    //ax->setDisabled(true);
 
 
     con->setLayout(Lay2);
@@ -108,12 +113,12 @@ void asly::showcontact(std::vector<absChat*>ser){ std::vector<QPushButton* > con
 
     connect(esm,SIGNAL(clicked()),this,SLOT(on_contact_clicked(esm->text())));
 
-     }Lay->addSpacerItem(horizSpacer);
+     }Lay->addSpacerItem(horizSpacer);ui->contactgroup->show();
                                                    ui->contactgroup->setLayout(Lay);
      }
 
 
-void asly::show_messeg(std::vector<Message* > messeges)
+void asly::show_messeg( std::vector<nlohmann::json> messeges)
 {
     int i=0;
     qDeleteAll(ui->safhechat->findChildren<QWidget *>(QString(), Qt::FindDirectChildrenOnly));
@@ -132,9 +137,9 @@ void asly::show_messeg(std::vector<Message* > messeges)
                          "padding-left:4px;"
                          "font: 900 9pt Segoe UI Black;");
    messa->setReadOnly(true);
-   messa->setText(QString::fromStdString(messeges[i]->src+"\n"+messeges[i]->body+"\n                        "+messeges[i]->date));
+   messa->setText(QString::fromStdString(std::string(messeges[i]["src"])+'\n'+std::string(messeges[i]["body"])+'\n'+std::string(messeges[i]["date"])));
    messa->setMaximumSize(400,150);
-   if(messeges[i]->src==name.toStdString()){
+   if(messeges[i]["src"]==name.toStdString()){
        mess->setLayout(Lay2);
        Lay2->addSpacerItem(horizSpacer2);
        Lay2->addWidget(messa);
@@ -153,13 +158,20 @@ asly::~asly()
 
 void asly::on_pushButton_2_clicked()
 {
+    try{
+    std::string esm=ui->esmsh->text().toStdString();
+    user->createChat(std::pair(esm,User::type::group));
+}catch(std::runtime_error &e){
+
+    }
+    showcontact();
 
 }
 
 
 void asly::on_safejadid_clicked()
 {
-    ui->setting->setMaximumSize(QSize(12342,12321));
+    ui->setting->setMaximumSize(12342,12321);
 }
 
 
@@ -193,28 +205,32 @@ void asly::on_send_clicked()
 
         QString mass=ui->textEdit-> toPlainText();
         ui->textEdit->clear();
-        QString src=name;
-        while(true){
-        if(user->getChats()[i]->getID()==ui->username->text().toStdString()){
-            if(dynamic_cast<Chat*>(user->getChats()[i])!=NULL){
-             user->sendMessage<Chat>(mass.toStdString(),user->getChats()[i]); i++;
+        QString dsn=name;ui->username->text();
+        std::map<std::pair<std::string, User::type>, std::vector<nlohmann::json>>::iterator it;
+        for (it=user->getChats().begin();it!=user->getChats().end();it++){
+            if(dsn.toStdString()==it->first.first)break;
+        }
+
+        if(it!=user->getChats().end()){
+            if(it->first.second==User::type::user){
+             user->sendMessage(mass.toStdString(),it->first);
 
 
             }
-            if(dynamic_cast<Group*>(user->getChats()[i])!=NULL){
+            if(it->first.second==User::type::group){
 
-             user->sendMessage<Group>(mass.toStdString(),user->getChats()[i]); i++;
+             user->sendMessage(mass.toStdString(),it->first);
 
             }
-            if(dynamic_cast<Channel*>(user->getChats()[i])!=NULL){
-                user->sendMessage<Channel>(mass.toStdString(),user->getChats()[i]); i++;
+            if(it->first.second==User::type::channel){
+               user->sendMessage(mass.toStdString(),it->first);
 
             }
         }
-            i++;
-        break;
 
-        }
+
+
+
 
     }
 }
@@ -240,50 +256,44 @@ void asly::on_send_clicked()
 
 void asly::on_doserch_clicked()
 {
-    QString id=ui->serchtxt->text();try{
-    user->joinChannel<Channel>(id.toStdString());
-    }
-    catch(std::runtime_error &e){
+    QString id=ui->serchtxt->text();
         try{
-         user->joinChannel<Group>(id.toStdString());
+            user->sendMessage("a",std::pair(ui->serchtxt->text().toStdString(),user->type::user));
+
+            show_messeg(user->getChats()[std::pair(ui->serchtxt->text().toStdString(),user->type::user)]);
+
+            ui->serchtxt->clear();
+            showcontact();
+
         }
-        catch(std::runtime_error &e){
-            try{
-             Chat* cha=new Chat(id.toStdString());
-                           user->sendMessage<Chat>("s",cha);
-                           user->addChat(cha);
-            }
-            catch(std::runtime_error &e){ui->serchtxt->setText("dorostesh kon");}
+         catch (...) {
+        ui->serchtxt->setText("dorosteshkon");
         }
     }
-
-}
 
 
 void asly::on_chanel_clicked()
 {
-    Channel* gr;
-       std::string esm=ui->esmsh->text().toStdString();
-       gr=user->createChat<Channel>(esm);
-       user->sendMessage<Channel>("a",gr);
-       user->addChat(gr);
-       showcontact(user->getChats());
+       try{
+       std::string esm=ui->lineEdit->text().toStdString();
+       user->createChat(std::pair(esm,User::type::group));
+   }catch(std::runtime_error &e){
 
+       }
+      // showcontact();
 
 }
 
 
 void asly::on_gruop_clicked()
-{   Group* gr;
+{
     try{
-    std::string esm=ui->esmsh->text().toStdString();
-    gr=user->createChat<Group>(esm);
-    user->sendMessage<Group>("a",gr);
+    std::string esm=ui->lineEdit->text().toStdString();
+    user->createChat(std::pair(esm,User::type::group));
 }catch(std::runtime_error &e){
 
     }
-    user->addChat(gr);
-    showcontact(user->getChats());
+    //showcontact();
 }
 
 
@@ -330,3 +340,16 @@ void asly::RemoveLayout (QWidget* widget)
     delete layout;
     }
 }
+
+void asly::on_jgroup_clicked()
+{       try{
+        std::string esm=ui->esmsh->text().toStdString();
+        user->joinChat(std::pair(esm,User::type::group));
+    }catch(std::runtime_error &e){
+
+        }
+        showcontact();
+
+
+}
+

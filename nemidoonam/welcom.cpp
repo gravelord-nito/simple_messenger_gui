@@ -39,16 +39,17 @@ void welcom::on_loginbuttom_clicked()
     pass=ui->pass->text();
     user=ui->user->text();
      User* zz=new User ();
-
-
-
-
-    zz->login(user.toStdString(),pass.toStdString());
 asly* asl=new asly;
+
+
+     try{
+    zz->login(user.toStdString(),pass.toStdString());
+
         asl->show();
         asl->setuser(zz);
         asl->setname(user);
-        asl->showcontact(zz->getChats());
-this->close();
+       // asl->showcontact();
+this->close();}
+     catch(...){}
 }
 

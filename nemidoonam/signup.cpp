@@ -23,15 +23,19 @@ void signup::on_pushButton_3_clicked()
 
 void signup::on_pushButton_clicked()
 {
+      asly* asl=new class asly;
     QString pass=ui->pass->text();
     QString user=ui->username->text();
      User* zz=new User ();
+     try{
     zz->signup(user.toStdString(),pass.toStdString());
-    asly* asl=new class asly;
+
     asl->show();
     asl->setuser(zz);
     //asl->setuser();
     asl->setname(user);
     this->close();
+     }
+     catch(...){}
 }
 
