@@ -67,4 +67,5 @@
         <file>standard/world.png</file>
         <file>Desktop.png</file>
     </qresource>
+    <qresource prefix="/"/>
 </RCC>
