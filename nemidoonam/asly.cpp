@@ -9,6 +9,7 @@ asly::asly(QWidget *parent) :
     ui->user->hide();
     ui->type->hide();
     ui->username_2->setText(name);
+
 }
 
 void asly::on_contact_clicked(QString id){int j=0; int iz;
@@ -16,10 +17,11 @@ void asly::on_contact_clicked(QString id){int j=0; int iz;
            ui->serchtxt->clear();
            for(iz=user->getChats().size();iz!=0;iz--){
 
-               if(user->getChats()[iz]->getID()==id.toStdString())
+               if(user->getChats()[iz]->getID()==id.toStdString()){
                    //user->addChat();
-               show_messeg(user->getChats()[iz]->getMessages());   ui->user->setWindowIconText(QString::fromStdString(user->getChats()[iz]->getID()));
+               show_messeg(user->getChats()[iz]->getMessages());   ui->username->setText(QString::fromStdString(user->getChats()[iz]->getID()));
                break;
+               }
            }
        }
 
@@ -44,7 +46,7 @@ void asly::on_contact_clicked(QString id){int j=0; int iz;
     }
     if(dynamic_cast<Channel*>(user->getChats()[iz])!=NULL){
         Channel* temp=dynamic_cast<Channel*>(user->getChats()[iz]);
-        if(temp->getAdmin()==name.toStdString())
+        if(temp->getMessages()[0]->src==name.toStdString())
     ui->type->show();
     ui->user->show();
 
@@ -59,50 +61,64 @@ void asly::on_contact_clicked(QString id){int j=0; int iz;
 
 }
 void asly::showcontact(std::vector<absChat*>ser){ std::vector<QPushButton* > contacts;
-     qDeleteAll(ui->contactgroup->findChildren<QWidget *>(QString(), Qt::FindDirectChildrenOnly));
-     QVBoxLayout *Lay = new QVBoxLayout;
-     ui->contactgroup->setLayout(Lay);
-     QSpacerItem* horizSpacer = new QSpacerItem(4000, 40000, QSizePolicy::Minimum, QSizePolicy::Expanding);
-     Lay->addSpacerItem(horizSpacer);
+     //qDeleteAll(ui->contactgroup->findChildren<QWidget *>(QString(), Qt::FindDirectChildrenOnly));
+     //qDeleteAll(ui->contactgroup->findChildren<QBoxLayout *>(QString(), Qt::FindDirectChildrenOnly));
+    // clearLayout( ui->contactgroup->layout(),true);
+       RemoveLayout(ui->contactgroup);
+                                                   QVBoxLayout *Lay = NULL;
+      Lay = new QVBoxLayout;
+ QSpacerItem* horizSpacer=NULL;
+      horizSpacer = new QSpacerItem(0, 0, QSizePolicy::Minimum, QSizePolicy::Expanding);
+     //Lay->addSpacerItem(horizSpacer);
+     this->ui->scrollArea->setWidgetResizable(true);
+     //this->ui->scrollArea->setWidget(this->ui->contactgroup);
+     for (int j=0;j<int(ser.size());j++){
 
-     for (int j=0;j!=ser.size();j++){
 
-
-
-    QHBoxLayout *Lay2 = new QHBoxLayout;
-    QSpacerItem* horizSpacer2 = new QSpacerItem(4000, 40000, QSizePolicy::Minimum, QSizePolicy::Expanding);
-    QGroupBox* con=new QGroupBox;
+    QHBoxLayout *Lay2 =NULL;
+    Lay2 = new QHBoxLayout;
+    QSpacerItem* horizSpacer2 =NULL;
+    horizSpacer2 = new QSpacerItem(0,0, QSizePolicy::Minimum, QSizePolicy::Expanding);
+    QGroupBox* con=NULL;
+    con=new QGroupBox;
     //con->clearMask();
-    QPushButton* ax=new QPushButton;
-    QPushButton* esm=new QPushButton;
-    contacts.push_back(esm);
+    QPushButton* ax=NULL;QPushButton* esm=NULL;
+    ax=new QPushButton;
+    esm=new QPushButton;
     ax->setMinimumSize(20,20);
      esm->setMinimumSize(280,20);
      con->setMinimumSize(100,40);
+     con->setStyleSheet("font: 900 11pt Segoe UI Black;"
+                        "color: rgb(255, 255, 255);");
     ax->setStyleSheet("font: 900 11pt Segoe UI Black;"
                       "color: rgb(255, 255, 255);");
     esm->setStyleSheet("background-color: rgb(120, 255, 140);"
-                       "Text:aqqa;");
+                       );
     esm->setText(QString::fromStdString(ser[j]->getID()));
     esm->setFlat(false);
-    ax->setFlat(false);
+    ax->setFlat(true);
     ax->setDisabled(true);
 
 
     con->setLayout(Lay2);
-    Lay2->addSpacerItem(horizSpacer2);
+
     Lay2->addWidget(esm);
-    Lay2->addWidget(ax);
+    Lay2->addWidget(ax); Lay2->addSpacerItem(horizSpacer2);
+ Lay->addWidget(con);
+
     connect(esm,SIGNAL(clicked()),this,SLOT(on_contact_clicked(esm->text())));
+
+     }Lay->addSpacerItem(horizSpacer);
+                                                   ui->contactgroup->setLayout(Lay);
      }
-     }
+
 
 void asly::show_messeg(std::vector<Message* > messeges)
 {
     int i=0;
     qDeleteAll(ui->safhechat->findChildren<QWidget *>(QString(), Qt::FindDirectChildrenOnly));
-    for(i=0,i!=messeges.size();i++){
- QHBoxLayout *Lay = new QHBoxLayout; QSpacerItem* horizSpacer = new QSpacerItem(4000, 40000, QSizePolicy::Minimum, QSizePolicy::Expanding);
+    for(i=0;i!=messeges.size();i++){
+ QVBoxLayout *Lay = new QVBoxLayout; QSpacerItem* horizSpacer = new QSpacerItem(4000, 40000, QSizePolicy::Minimum, QSizePolicy::Expanding);
   ui->safhechat->setLayout(Lay);
   Lay->addSpacerItem(horizSpacer);
    QHBoxLayout *Lay2 = new QHBoxLayout;
@@ -171,41 +187,55 @@ void asly::on_pushButton_20_clicked()
 
 
 void asly::on_send_clicked()
-{QTime* QTime=new  class QTime;
+{
     int i=0;
     if(ui->textEdit!=NULL){
+
         QString mass=ui->textEdit-> toPlainText();
         ui->textEdit->clear();
-        QString time=QString::number(QTime->hour())+":";QString::number(QTime->second());
         QString src=name;
-        QString dsn=ui->username->text();
-        Message* payam=new Message(mass.toStdString(),time.toStdString(),src.toStdString(),dsn.toStdString());
         while(true){
-        if(contact[i]->getID()==ui->username->text().toStdString())
-        contact[i]->addMessage(payam);
-        break;
+        if(user->getChats()[i]->getID()==ui->username->text().toStdString()){
+            if(dynamic_cast<Chat*>(user->getChats()[i])!=NULL){
+             user->sendMessage<Chat>(mass.toStdString(),user->getChats()[i]); i++;
+
+
+            }
+            if(dynamic_cast<Group*>(user->getChats()[i])!=NULL){
+
+             user->sendMessage<Group>(mass.toStdString(),user->getChats()[i]); i++;
+
+            }
+            if(dynamic_cast<Channel*>(user->getChats()[i])!=NULL){
+                user->sendMessage<Channel>(mass.toStdString(),user->getChats()[i]); i++;
+
+            }
         }
-        i++;
+            i++;
+        break;
+
+        }
+
     }
 }
 
 
-void asly::on_serchtxt_textChanged(const QString &arg1)
-{ if(ui->serchtxt->text().toStdString()=="")
-    {
-        showcontact(user->getChats());
-        return;
-    }
-    std::string serch=ui->serchtxt->text().toStdString();
-    std::vector<absChat*>ser;
-     int it;
-     for(it=user->getChats().size();it!=0;it--){
-
-         if(user->getChats()[it]->getID()==serch)
-             ser.push_back(user->getChats()[it]);
-     }
-     showcontact(ser);
-}
+//void asly::on_serchtxt_textChanged(const QString &arg1)
+//{ if(ui->serchtxt->text().toStdString()=="")
+//    {
+//        showcontact(user->getChats());
+//        return;
+//    }
+//    std::string serch=ui->serchtxt->text().toStdString();
+//    std::vector<absChat*>ser;
+//     int it;
+//     for(it=user->getChats().size();it!=0;it--){
+//
+//         if(user->getChats()[it]->getID()==serch)
+//             ser.push_back(user->getChats()[it]);
+//     }
+//     showcontact(ser);
+//}
 
 
 void asly::on_doserch_clicked()
@@ -232,17 +262,71 @@ void asly::on_doserch_clicked()
 
 void asly::on_chanel_clicked()
 {
-    std::string esm=ui->esmsh->text().toStdString();
-    user->createChat<Channel>(esm);
-
+    Channel* gr;
+       std::string esm=ui->esmsh->text().toStdString();
+       gr=user->createChat<Channel>(esm);
+       user->sendMessage<Channel>("a",gr);
+       user->addChat(gr);
+       showcontact(user->getChats());
 
 
 }
 
 
 void asly::on_gruop_clicked()
-{
+{   Group* gr;
+    try{
     std::string esm=ui->esmsh->text().toStdString();
-    user->createChat<Group>(esm);
+    gr=user->createChat<Group>(esm);
+    user->sendMessage<Group>("a",gr);
+}catch(std::runtime_error &e){
+
+    }
+    user->addChat(gr);
+    showcontact(user->getChats());
 }
 
+
+void asly::on_sakht_clicked()
+{
+    ui->setting->setMaximumSize(0,0);
+    ui->sakhtcg->setMaximumSize(1234,1234);
+}
+
+
+void asly::on_logout_clicked()
+{
+    user->logout();
+    exit(0);
+}
+
+
+void asly::on_back_clicked()
+{
+    ui->sakhtcg->setMaximumSize(0,0);
+}
+void asly:: clearLayout(QLayout* layout, bool deleteWidgets)
+{
+    while (QLayoutItem* item = layout->takeAt(0))
+    {
+        if (deleteWidgets)
+        {
+            if (QWidget* widget = item->widget())
+                widget->deleteLater();
+        }
+        if (QLayout* childLayout = item->layout())
+            clearLayout(childLayout, deleteWidgets);
+        delete item;
+    }
+}
+void asly::RemoveLayout (QWidget* widget)
+{
+    QLayout* layout = widget->layout ();
+    if (layout != 0)
+    {
+    QLayoutItem *item;
+    while ((item = layout->takeAt(0)) != 0)
+        layout->removeItem (item);
+    delete layout;
+    }
+}

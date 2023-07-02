@@ -38,16 +38,17 @@ void welcom::on_loginbuttom_clicked()
 {QString pass;QString user;
     pass=ui->pass->text();
     user=ui->user->text();
-    try{
-     User zz(user.toStdString(),pass.toStdString());
-    }
-     catch(std::runtime_error &e){
-         ui->user->setStyleSheet("color: rgb(255, 0, 4)");
-         ui->pass->setStyleSheet("color: rgb(255, 0, 4)");
-     }
+     User* zz=new User ();
+
+
+
+
+    zz->login(user.toStdString(),pass.toStdString());
 asly* asl=new asly;
         asl->show();
+        asl->setuser(zz);
         asl->setname(user);
+        asl->showcontact(zz->getChats());
 this->close();
 }
 
