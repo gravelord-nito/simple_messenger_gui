@@ -41,7 +41,7 @@ json http_get(Quer& queries) {
 
 User::User() {
     ifstream ifile("data.txt");
-    cerr << ifile.is_open() << endl;
+    // cerr << ifile.is_open() << endl;
     if (!ifile.is_open() || ifile.eof()) {
         is_loggedin = 0;
         ifile.close();
@@ -104,9 +104,11 @@ const string User::getToken() { return token; }
 
 const string User::getUser() { return username; }
 
+vector<json> User::getChat(const pair<string, type>& p) { return chats[p]; }
+
 map<pair<string, User::type>, vector<json>> User::getChats() { return chats; }
 
-void User::joinChat(const std::pair<std::string, type>& p) {
+void User::joinChat(const pair<string, type>& p) {
     Quer mm {{"command", "join" + Stype[p.second]}, {Stype[p.second] + "_name", p.first}, {"token", token}};
     http_get(mm);
     retrieveChat(p);

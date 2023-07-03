@@ -23,6 +23,7 @@ public:
     bool isLoggedin();
     const std::string getToken();
     const std::string getUser();
+    std::vector<nlohmann::json> getChat(const std::pair<std::string, type>&);
     std::map<std::pair<std::string, type>, std::vector<nlohmann::json>> getChats();
 
     void signup(const std::string&, const std::string&);
