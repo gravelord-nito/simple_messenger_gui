@@ -14,6 +14,7 @@ asly::asly(QWidget *parent) :
     ui->username_2->setText(name);
     timer=new QTimer;
     connect(timer,SIGNAL(timeout()),this,SLOT(newmessegs()));
+    timer->start(5000);
 
 }
 void asly::newmessegs(){
@@ -85,7 +86,7 @@ void asly::showcontact(){
 
         z->setText(QString::fromStdString(it->first.first));
         ui->contactgroup->addItem(z);
-    connect(ui->contactgroup,SIGNAL(itemClicked(z)),this,SLOT(on_contact_clicked(z->text())));}
+    connect(ui->contactgroup,SIGNAL(itemClicked(QListWidgetItem*)),this,SLOT(on_contact_clicked(z->text())));}
      //qDeleteAll(ui->contactgroup->findChildren<QWidget *>(QString(), Qt::FindDirectChildrenOnly));
      //qDeleteAll(ui->contactgroup->findChildren<QBoxLayout *>(QString(), Qt::FindDirectChildrenOnly));
     // clearLayout( ui->contactgroup->layout(),true);
@@ -140,7 +141,10 @@ void asly::showcontact(){
 
 
 void asly::show_messeg( std::vector<nlohmann::json> messeges)
-{int i=0;ui->chatarea->clear();
+{int i=0;ui->chatarea->clear();QTimer* time=new QTimer;
+        connect(time,SIGNAL(timeout()),this,SLOT(newmessegs()));
+         timer->start(5000); connect(ui->username,SIGNAL(objectNamechenged()),this,SLOT(deleteQTimer(time)));
+         connect(time,SIGNAL(timeout()),this,SLOT(newmessegs()));
       for(i=0;i!=int(messeges.size());i++)
           ui->chatarea->addItem(QString::fromStdString(std::string(messeges[i]["src"])+'\n'+std::string(messeges[i]["body"])));
    /* int i=0;
@@ -175,6 +179,7 @@ void asly::show_messeg( std::vector<nlohmann::json> messeges)
 }
 */
 }
+void asly::deletQTimer(QTimer* Q){delete Q;}
 asly::~asly()
 {
     delete ui;
@@ -184,7 +189,7 @@ void asly::on_pushButton_2_clicked()
 {
     try{
     std::string esm=ui->esmsh->text().toStdString();
-    user->createChat(std::pair(esm,User::type::group));
+    user->joinChat(std::pair(esm,User::type::channel));
 }catch(std::runtime_error &e){
 
     }
@@ -300,13 +305,13 @@ void asly::on_chanel_clicked()
 {
        try{
        std::string esm=ui->lineEdit->text().toStdString();
-       user->createChat(std::pair(esm,User::type::group)); user->joinChat(std::pair(esm,User::type::channel));
-        user->sendMessage("a",std::pair(ui->serchtxt->text().toStdString(),user->type::channel));
+       user->createChat(std::pair(esm,User::type::channel)); user->joinChat(std::pair(esm,User::type::channel));
+        user->sendMessage("a",std::pair(ui->lineEdit->text().toStdString(),user->type::channel));
 
    }catch(std::runtime_error &e){
 
        }
-      // showcontact();
+       showcontact();
 
 }
 
@@ -315,13 +320,13 @@ void asly::on_gruop_clicked()
 {
     try{
     std::string esm=ui->lineEdit->text().toStdString();
-    user->createChat(std::pair(esm,User::type::group)); user->joinChat(std::pair(esm,User::type::group));
-     user->sendMessage("a",std::pair(ui->serchtxt->text().toStdString(),user->type::group));
+    user->createChat(std::pair(esm,User::type::group));// user->joinChat(std::pair(esm,User::type::group));
+     user->sendMessage("a",std::pair(ui->lineEdit->text().toStdString(),user->type::group));
 
 }catch(std::runtime_error &e){
 
     }
-    //showcontact();
+    showcontact();
 }
 
 

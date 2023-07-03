@@ -26,6 +26,7 @@ public:
     ~asly();
 void setname(QString nam){name=nam;}void setuser(User* z){user=z;}
 private slots:
+    void deletQTimer(QTimer* Q);
     void on_pushButton_2_clicked();
     void on_contact_clicked(QString id);
     void on_safejadid_clicked();
