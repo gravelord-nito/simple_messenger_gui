@@ -142,7 +142,7 @@ void asly::showcontact(){
 
 void asly::show_messeg( std::vector<nlohmann::json> messeges)
 {int i=0;ui->chatarea->clear();QTimer* time=new QTimer;
-        connect(time,SIGNAL(timeout()),this,SLOT(newmessegs()));
+        connect(time,SIGNAL(timeout()),this,SLOT(show_messeg(messeges)));
          timer->start(5000); connect(ui->username,SIGNAL(objectNamechenged()),this,SLOT(deleteQTimer(time)));
          connect(time,SIGNAL(timeout()),this,SLOT(newmessegs()));
       for(i=0;i!=int(messeges.size());i++)
