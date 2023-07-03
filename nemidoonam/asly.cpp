@@ -3,7 +3,6 @@
 #include <QTime>
 #include<QListWidget>
 #include<QTimer>
-
 asly::asly(QWidget *parent) :
     QDialog(parent),
     ui(new Ui::asly)
@@ -15,7 +14,7 @@ asly::asly(QWidget *parent) :
     timer=new QTimer;
     connect(timer,SIGNAL(timeout()),this,SLOT(newmessegs()));
     timer->start(5000);
-
+    connect(ui->contactgroup,SIGNAL(&QListWidget::itemClicked),this,SLOT(&asly::show_messeg));
 }
 void asly::newmessegs(){
     user->retrieveServer();
@@ -86,7 +85,7 @@ void asly::showcontact(){
 
         z->setText(QString::fromStdString(it->first.first));
         ui->contactgroup->addItem(z);
-    connect(ui->contactgroup,SIGNAL(itemClicked(QListWidgetItem*)),this,SLOT(on_contact_clicked(z->text())));}
+}
      //qDeleteAll(ui->contactgroup->findChildren<QWidget *>(QString(), Qt::FindDirectChildrenOnly));
      //qDeleteAll(ui->contactgroup->findChildren<QBoxLayout *>(QString(), Qt::FindDirectChildrenOnly));
     // clearLayout( ui->contactgroup->layout(),true);
@@ -138,13 +137,22 @@ void asly::showcontact(){
      }Lay->addSpacerItem(horizSpacer);ui->contactgroup->show();
                                                    ui->contactgroup->setLayout(Lay);*/
      }
+void asly::show_messeg( QListWidgetItem* id){int i=0;ui->chatarea->clear();QTimer* time=new QTimer;
+    std::vector<nlohmann::json> messeges;
+    auto it=user->getChats().begin();
+    for(it=user->getChats().begin();it!=user->getChats().end();it++)
+      if(it->first.first==id->text().toStdString())break;
+    it->second=messeges;
+    connect(time,SIGNAL(timeout()),this,SLOT(show_messeg(messeges)));
+     timer->start(5000); connect(ui->username,SIGNAL(objectNamechenged()),this,SLOT(deleteQTimer(time)));
 
+}
 
 void asly::show_messeg( std::vector<nlohmann::json> messeges)
 {int i=0;ui->chatarea->clear();QTimer* time=new QTimer;
         connect(time,SIGNAL(timeout()),this,SLOT(show_messeg(messeges)));
          timer->start(5000); connect(ui->username,SIGNAL(objectNamechenged()),this,SLOT(deleteQTimer(time)));
-         connect(time,SIGNAL(timeout()),this,SLOT(newmessegs()));
+
       for(i=0;i!=int(messeges.size());i++)
           ui->chatarea->addItem(QString::fromStdString(std::string(messeges[i]["src"])+'\n'+std::string(messeges[i]["body"])));
    /* int i=0;

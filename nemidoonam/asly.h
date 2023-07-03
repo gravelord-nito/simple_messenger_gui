@@ -4,6 +4,7 @@
 #include <QDialog>
 #include<QTime>
 #include<QLayoutItem>
+#include<QListWidget>
 namespace Ui {
 class asly;
 }
@@ -63,7 +64,7 @@ private slots:
 
 private:
     User* user;
-
+    void show_messeg(QListWidgetItem* z);
     void show_messeg(std::vector<nlohmann::json> messeges);
     QString name;
     Ui::asly *ui;
