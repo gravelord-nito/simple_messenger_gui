@@ -1,19 +1,33 @@
 #include "asly.h"
 #include "ui_asly.h"//dokme ha adrezan pass mosavi bezary ye dokme ro neshon midan pash mishe fahmid kodoom ro zade
 #include <QTime>
+#include<QListWidget>
+#include<QTimer>
+
 asly::asly(QWidget *parent) :
     QDialog(parent),
     ui(new Ui::asly)
 {
     ui->setupUi(this);
-    ui->user->hide();
-    ui->type->hide();
+    ui->user->setMaximumSize(0,0);
+    ui->type->setMaximumSize(0,0);
     ui->username_2->setText(name);
+    timer=new QTimer;
+    connect(timer,SIGNAL(timeout()),this,SLOT(newmessegs()));
+    timer->start(5000);
 
 }
-
-void asly::on_contact_clicked(QString id){int j=0; int iz;
-       if(ui->serchtxt->text().toStdString()!=""){
+void asly::newmessegs(){
+    user->retrieveServer();
+}
+void asly::on_contact_clicked(QString id){int j=0;
+                                          std::map<std::pair<std::string, User::type>, std::vector<nlohmann::json>>::iterator it;
+                                          for (it=user->getChats().begin();it!=user->getChats().end();it++){
+                                              if(it->first.first==id.toStdString())
+                                                  break;
+                                          }
+                                                                                show_messeg(it->second);
+      /* if(ui->serchtxt->text().toStdString()!=""){
            try{
                user->sendMessage("a",std::pair(ui->serchtxt->text().toStdString(),user->type::user));
 
@@ -25,11 +39,10 @@ void asly::on_contact_clicked(QString id){int j=0; int iz;
             catch (...) {
            ui->serchtxt->setText("dorosteshkon");
            }
-       }
+       }*/
 
 
 
-    std::map<std::pair<std::string, User::type>, std::vector<nlohmann::json>>::iterator it;
     for (it=user->getChats().begin();it!=user->getChats().end();it++){
         if(it->first.first==id.toStdString())
             break;
@@ -37,25 +50,26 @@ void asly::on_contact_clicked(QString id){int j=0; int iz;
     if(it!=user->getChats().end()){
     if(it->first.second==User::type::user){
         show_messeg(it->second);
-    ui->type->show();
-    ui->user->show();
+    ui->type->setMaximumSize(1234,1234);
+    ui->user->setMaximumSize(1234,1234);
 
     }
-    if(it->second==User::type::channel){
+    if(it->first.second==User::type::channel){
             show_messeg(it->second);
-    ui->type->show();
-    ui->user->show();
+           if( std::string(it->second[0]["src"])==name.toStdString());
+    ui->type->setMaximumSize(1234,1234);
+    ui->user->setMaximumSize(1234,1234);
 
     }
     if(it->second==User::type::group){
        show_messeg(it->second);
-        if(std::string(it->second[0]["src"])==name.toStdString())
-    ui->type->show();
-    ui->user->show();
+
+    ui->type->setMaximumSize(1234,1234);
+    ui->user->setMaximumSize(1234,1234);
 
     }
      ui->username->setText(QString::fromStdString(it->first.first));
-    std::vector<QPushButton* > contacts;
+
     //this->show_messeg(messeges);
 
   //  for(it=contact.begin();it!=contact.end();it++){j++;
@@ -64,11 +78,19 @@ void asly::on_contact_clicked(QString id){int j=0; int iz;
    }
    }
 
-void asly::showcontact(){ std::vector<QPushButton* > contacts;
+void asly::showcontact(){
+    ui->contactgroup->clear();
+    std::map<std::pair<std::string, User::type>, std::vector<nlohmann::json>>::iterator it;
+    for (it=user->getChats().begin();it!=user->getChats().end();it++){
+        QListWidgetItem*z=new QListWidgetItem;
+
+        z->setText(QString::fromStdString(it->first.first));
+        ui->contactgroup->addItem(z);
+    connect(ui->contactgroup,SIGNAL(itemClicked(QListWidgetItem*)),this,SLOT(on_contact_clicked(z->text())));}
      //qDeleteAll(ui->contactgroup->findChildren<QWidget *>(QString(), Qt::FindDirectChildrenOnly));
      //qDeleteAll(ui->contactgroup->findChildren<QBoxLayout *>(QString(), Qt::FindDirectChildrenOnly));
     // clearLayout( ui->contactgroup->layout(),true);
-      RemoveLayout(ui->contactgroup);
+   /*   RemoveLayout(ui->contactgroup);
                                                    QVBoxLayout *Lay = NULL;
       Lay = new QVBoxLayout;
  QSpacerItem* horizSpacer=NULL;
@@ -114,14 +136,19 @@ void asly::showcontact(){ std::vector<QPushButton* > contacts;
     connect(esm,SIGNAL(clicked()),this,SLOT(on_contact_clicked(esm->text())));
 
      }Lay->addSpacerItem(horizSpacer);ui->contactgroup->show();
-                                                   ui->contactgroup->setLayout(Lay);
+                                                   ui->contactgroup->setLayout(Lay);*/
      }
 
 
 void asly::show_messeg( std::vector<nlohmann::json> messeges)
-{
-    int i=0;
-    qDeleteAll(ui->safhechat->findChildren<QWidget *>(QString(), Qt::FindDirectChildrenOnly));
+{int i=0;ui->chatarea->clear();QTimer* time=new QTimer;
+        connect(time,SIGNAL(timeout()),this,SLOT(newmessegs()));
+         timer->start(5000); connect(ui->username,SIGNAL(objectNamechenged()),this,SLOT(deleteQTimer(time)));
+         connect(time,SIGNAL(timeout()),this,SLOT(newmessegs()));
+      for(i=0;i!=int(messeges.size());i++)
+          ui->chatarea->addItem(QString::fromStdString(std::string(messeges[i]["src"])+'\n'+std::string(messeges[i]["body"])));
+   /* int i=0;
+    qDeleteAll(ui->s->findChildren<QWidget *>(QString(), Qt::FindDirectChildrenOnly));
     for(i=0;i!=messeges.size();i++){
  QVBoxLayout *Lay = new QVBoxLayout; QSpacerItem* horizSpacer = new QSpacerItem(4000, 40000, QSizePolicy::Minimum, QSizePolicy::Expanding);
   ui->safhechat->setLayout(Lay);
@@ -150,7 +177,9 @@ void asly::show_messeg( std::vector<nlohmann::json> messeges)
      Lay2->addSpacerItem(horizSpacer2);
    }
 }
+*/
 }
+void asly::deletQTimer(QTimer* Q){delete Q;}
 asly::~asly()
 {
     delete ui;
@@ -160,7 +189,7 @@ void asly::on_pushButton_2_clicked()
 {
     try{
     std::string esm=ui->esmsh->text().toStdString();
-    user->createChat(std::pair(esm,User::type::group));
+    user->joinChat(std::pair(esm,User::type::channel));
 }catch(std::runtime_error &e){
 
     }
@@ -276,11 +305,13 @@ void asly::on_chanel_clicked()
 {
        try{
        std::string esm=ui->lineEdit->text().toStdString();
-       user->createChat(std::pair(esm,User::type::group));
+       user->createChat(std::pair(esm,User::type::channel)); user->joinChat(std::pair(esm,User::type::channel));
+        user->sendMessage("a",std::pair(ui->lineEdit->text().toStdString(),user->type::channel));
+
    }catch(std::runtime_error &e){
 
        }
-      // showcontact();
+       showcontact();
 
 }
 
@@ -289,11 +320,13 @@ void asly::on_gruop_clicked()
 {
     try{
     std::string esm=ui->lineEdit->text().toStdString();
-    user->createChat(std::pair(esm,User::type::group));
+    user->createChat(std::pair(esm,User::type::group));// user->joinChat(std::pair(esm,User::type::group));
+     user->sendMessage("a",std::pair(ui->lineEdit->text().toStdString(),user->type::group));
+
 }catch(std::runtime_error &e){
 
     }
-    //showcontact();
+    showcontact();
 }
 
 

@@ -26,6 +26,7 @@ public:
     ~asly();
 void setname(QString nam){name=nam;}void setuser(User* z){user=z;}
 private slots:
+    void deletQTimer(QTimer* Q);
     void on_pushButton_2_clicked();
     void on_contact_clicked(QString id);
     void on_safejadid_clicked();
@@ -35,7 +36,7 @@ private slots:
     void on_pushButton_14_clicked();
 
     void on_pushButton_20_clicked();
-
+    void newmessegs();
 
 
 
@@ -66,6 +67,7 @@ private:
     void show_messeg(std::vector<nlohmann::json> messeges);
     QString name;
     Ui::asly *ui;
+    QTimer* timer;
 };
 
 #endif // ASLY_H

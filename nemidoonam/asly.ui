@@ -45,8 +45,8 @@
      </property>
      <property name="maximumSize">
       <size>
-       <width>0</width>
-       <height>0</height>
+       <width>1234</width>
+       <height>1234</height>
       </size>
      </property>
      <property name="sizeIncrement">
@@ -608,8 +608,8 @@ color: rgb(255, 255, 255);</string>
      </property>
      <property name="maximumSize">
       <size>
-       <width>12345</width>
-       <height>123456</height>
+       <width>0</width>
+       <height>0</height>
       </size>
      </property>
      <property name="styleSheet">
@@ -1111,7 +1111,7 @@ border-color: none;</string>
           <rect>
            <x>0</x>
            <y>0</y>
-           <width>227</width>
+           <width>209</width>
            <height>572</height>
           </rect>
          </property>
@@ -1132,24 +1132,7 @@ border-color: none;</string>
            <number>0</number>
           </property>
           <item>
-           <widget class="QGroupBox" name="contactgroup">
-            <property name="maximumSize">
-             <size>
-              <width>12343212</width>
-              <height>1232123</height>
-             </size>
-            </property>
-            <property name="sizeIncrement">
-             <size>
-              <width>24664</width>
-              <height>23553</height>
-             </size>
-            </property>
-            <property name="title">
-             <string>GroupBox</string>
-            </property>
-            <layout class="QVBoxLayout" name="verticalLayout_12"/>
-           </widget>
+           <widget class="QListWidget" name="contactgroup"/>
           </item>
          </layout>
         </widget>
@@ -1290,7 +1273,7 @@ color: rgb(255, 255, 255);</string>
           <rect>
            <x>0</x>
            <y>0</y>
-           <width>679</width>
+           <width>621</width>
            <height>512</height>
           </rect>
          </property>
@@ -1311,31 +1294,10 @@ color: rgb(255, 255, 255);</string>
            <number>0</number>
           </property>
           <item>
-           <widget class="QGroupBox" name="safhechat">
-            <property name="minimumSize">
-             <size>
-              <width>0</width>
-              <height>0</height>
-             </size>
-            </property>
-            <property name="maximumSize">
-             <size>
-              <width>1234567</width>
-              <height>1234567</height>
-             </size>
-            </property>
-            <property name="layoutDirection">
-             <enum>Qt::LeftToRight</enum>
-            </property>
+           <widget class="QListWidget" name="chatarea">
             <property name="styleSheet">
-             <string notr="true">border:none;
-background-image: url(:/new/prefix1/Desktop.png);
-</string>
+             <string notr="true">border:none;</string>
             </property>
-            <property name="title">
-             <string/>
-            </property>
-            <layout class="QVBoxLayout" name="verticalLayout_11"/>
            </widget>
           </item>
          </layout>
