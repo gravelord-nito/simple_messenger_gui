@@ -1,6 +1,0 @@
-*.o
-*.exe
-.vscode
-test.cpp
-build*
-*.txt
