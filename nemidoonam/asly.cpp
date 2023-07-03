@@ -320,8 +320,8 @@ void asly::on_gruop_clicked()
 {
     try{
     std::string esm=ui->lineEdit->text().toStdString();
-    user->createChat(std::pair(esm,User::type::group));// user->joinChat(std::pair(esm,User::type::group));
-     user->sendMessage("a",std::pair(ui->lineEdit->text().toStdString(),user->type::group));
+    user->createChat(std::pair(esm,User::User::group));// user->joinChat(std::pair(esm,User::type::group));
+    user->sendMessage("a",std::pair(ui->lineEdit->text().toStdString(),User::group));
 
 }catch(std::runtime_error &e){
 

@@ -8,17 +8,17 @@
 
 int main(int argc, char *argv[])
 {  QApplication a(argc, argv);MainWindow* w=new MainWindow;
-    QString filename = "http/data.txt";
-      QFile file(filename);
+//    QString filename = "http/data.txt";
+//      QFile file(filename);
 
-       if (file.open(QIODevice::ReadWrite)) {
-          QTextStream stream(&file);
-                stream << "something" << Qt::endl;
+//       if (file.open(QIODevice::ReadWrite)) {
+//          QTextStream stream(&file);
+//                stream << "something" << Qt::endl;
 
-       }
-      if(file.exists()){w->show();}
+//       }
+//      if(file.exists()){w->show();}
 
-   file.close();
+//   file.close();
 
 
 
