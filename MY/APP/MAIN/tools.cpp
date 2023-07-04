@@ -356,6 +356,7 @@ namespace Myapp {
         is_loggedin = 0;
         Quer mm{ {"command", "logout"}, {"username", username}, {"password", password} };
         http_get(mm);
+        chats.clear();
     }
 
     const string User::getToken() { return token; }
