@@ -6,6 +6,7 @@
 #include <cstdio>
 #include <thread>
 #include <chrono>
+#include <set>
 #include "imgui.h"
 #include "tools.h"
 
@@ -27,36 +28,57 @@ namespace MyUI {
     char str1[128] = "";
     char str2[128] = "";
     pair<string, User::type> selected = make_pair("", User::type::user);
+    string error;
 
     void RenderLogin() {
-        ImGui::Begin("Login Window");
+        ImGui::Begin("Login");
         ImGui::InputText("username", str1, IM_ARRAYSIZE(str1));
         ImGui::InputText("password", str2, IM_ARRAYSIZE(str2));
         if (ImGui::Button("Login")) {
-            u.login(str1, str2);
+            try {
+                u.login(str1, str2);
+            }
+            catch (const exception& e) {
+                error = e.what();
+                ImGui::OpenPopup("error popup");
+            }
         }
         if (ImGui::Button("dont have an account? signup here")) {
             signup = 1;
+        }
+        if (ImGui::BeginPopup("error popup")) {
+            ImGui::Text(error.c_str());
+            ImGui::EndPopup();
         }
         ImGui::End();
     }
 
     void RenderSignup() {
-        ImGui::Begin("Signup Window");
+        ImGui::Begin("Signup");
         ImGui::InputText("username", str1, IM_ARRAYSIZE(str1));
         ImGui::InputText("password", str2, IM_ARRAYSIZE(str2));
         if (ImGui::Button("Signup")) {
-            u.signup(str1, str2);
+            try {
+                u.signup(str1, str2);
+            }
+            catch (const exception& e) {
+                error = e.what();
+                ImGui::OpenPopup("error popup");
+            }
         }
         if (ImGui::Button("have an account? login here")) {
             signup = 0;
+        }
+        if (ImGui::BeginPopup("error popup")) {
+            ImGui::Text(error.c_str());
+            ImGui::EndPopup();
         }
         ImGui::End();
     }
 
     void ShowChat(pair<string, User::type> id) {
-        ImGui::Begin("Chat Window");
-        ImGui::Text((Stype[id.second] + " Chat").c_str());
+        ImGui::Begin("Chat");
+        ImGui::TextColored(ImVec4(1.0f, 1.0f, 0.0f, 1.0f), (Stype[id.second] + " MESSAGES").c_str());
         auto& chat = u.getChat(id);
         static float wrap_width = 600.0f;
         for (auto& m : chat) {
@@ -66,17 +88,29 @@ namespace MyUI {
         }
         static char str3[2048] = "";
         ImGui::InputText(" ", str3, IM_ARRAYSIZE(str3));
+        ImGui::SameLine();
         if (ImGui::Button("SEND")) {
-            u.sendMessage(str3, selected);
+            try {
+                u.sendMessage(str3, selected);
+            }
+            catch (const exception& e) {
+                error = e.what();
+                ImGui::OpenPopup("error popup");
+            }
+        }
+        if (ImGui::BeginPopup("error popup")) {
+            ImGui::Text(error.c_str());
+            ImGui::EndPopup();
         }
         ImGui::End();
     }
 
     void ShowList() {
-        ImGui::Begin("List Window");
+        ImGui::Begin("List");
         auto& chats = u.getChats();
         for (auto const& [id, vec] : chats)
         {
+            if (id.first == "") continue;
             if (ImGui::Selectable(id.first.c_str(), selected == id))
                 selected = id;
         }
@@ -90,28 +124,45 @@ namespace MyUI {
         ImGui::Begin("Options");
         static char str4[32] = "";
         ImGui::InputText("enter group/channel id", str4, IM_ARRAYSIZE(str4));
-        if (ImGui::Button("create group")) {
-            u.createChat(make_pair(str4, User::type::group));
+        try {
+            if (ImGui::Button("create group")) {
+                u.createChat(make_pair(str4, User::type::group));
+            }
+            if (ImGui::Button("create channel")) {
+                u.createChat(make_pair(str4, User::type::channel));
+            }
+            if (ImGui::Button("join group")) {
+                u.joinChat(make_pair(str4, User::type::group));
+            }
+            if (ImGui::Button("join channel")) {
+                u.joinChat(make_pair(str4, User::type::channel));
+            }
+            if (ImGui::Button("Logout")) {
+                selected = make_pair("", User::type::user);
+                u.logout();
+            }
         }
-        if (ImGui::Button("create channel")) {
-            u.createChat(make_pair(str4, User::type::channel));
+        catch (const exception& e) {
+            error = e.what();
+            ImGui::OpenPopup("error popup");
         }
-        if (ImGui::Button("join group")) {
-            u.joinChat(make_pair(str4, User::type::group));
-        }
-        if (ImGui::Button("join channel")) {
-            u.joinChat(make_pair(str4, User::type::channel));
-        }
-        if (ImGui::Button("Logout")) {
-            selected = make_pair("", User::type::user);
-            u.logout();
+        if (ImGui::BeginPopup("error popup")) {
+            ImGui::Text(error.c_str());
+            ImGui::EndPopup();
         }
         ImGui::End();
     }
 
     void UpdateChats() {
         while (runtrd) {
-            if (u.isLoggedin()) u.retrieveServer();
+            if (u.isLoggedin()) {
+                try {
+                    u.retrieveServer();
+                }
+                catch (const exception& e) {
+                    cerr << "Thread error: " << e.what() << endl;
+                }
+            }
             this_thread::sleep_for(5000ms);
         }
     }
@@ -122,6 +173,7 @@ namespace MyUI {
 
     void RenderUI() {
         //ImGui::ShowDemoWindow();
+
         static bool opt_fullscreen = true;
         static bool opt_padding = false;
         static ImGuiDockNodeFlags dockspace_flags = ImGuiDockNodeFlags_None;
@@ -196,14 +248,16 @@ namespace MyUI {
         }
 
         ImGui::End();
+
         if (!u.isLoggedin()) {
-            if(!signup) RenderLogin();
+            if (!signup) RenderLogin();
             else RenderSignup();
         }
         else {
             ShowList();
             Options();
         }
+
     }
 
 }
@@ -215,19 +269,20 @@ namespace Myapp {
         url += command + '?';
         for (auto const& [key, val] : queries) if (key != "command") url += key + '=' + val + '&';
 
+        json jres;
         try {
             cerr << "GET request: " << url << endl;
-            json jres = json::parse(http::Request(url).send("GET").body);
+            jres = json::parse(http::Request(url).send("GET").body);
             cerr << "Success: " << jres << endl;
-            if (jres["code"] != "200") throw runtime_error(jres["message"]);
-            return jres;
         }
         catch (const exception& e) {
             cerr << "Failed: http request failed, error: " << e.what() << endl;
-            return json();
             Sleep(5000);
             return http_get(command, queries);
         }
+
+        if (jres["code"] != "200") throw runtime_error(jres["message"]);
+        return jres;
     }
 
     json http_get(Quer& queries) {
@@ -254,14 +309,14 @@ namespace Myapp {
 
     void User::retrieveChat(const std::pair<std::string, type>& p) {
         string date = "00000000000000";
-        if (chats.find(p) != chats.end()) {
+        if (chats[p].size()) {
             string last = chats[p].back()["date"];
             date = last.substr(0, 4) + last.substr(5, 2) + last.substr(8, 2) + last.substr(11, 2) + last.substr(14, 2) + last.substr(17, 2);
         }
         Quer mm{ {"command", "get" + Stype[p.second] + "chats"}, {"dst", p.first}, {"date", date}, {"token", token} };
         json res = http_get(mm);
         int i = 0;
-        if (chats.find(p) != chats.end()) i = chats[p].size();
+        if (chats[p].size()) i++;
         while (res["block " + to_string(i)] != nullptr) {
             chats[p].push_back(res["block " + to_string(i++)]);
         }
@@ -284,11 +339,17 @@ namespace Myapp {
     }
 
     void User::login(const string& username, const string& password) {
-        Quer mm{ {"command", "login"}, {"username", username}, {"password", password} };
-        this->token = http_get(mm)["token"];
-        this->username = username;
-        this->password = password;
-        is_loggedin = 1;
+        try {
+            Quer mm{ {"command", "login"}, {"username", username}, {"password", password} };
+            json res = http_get(mm);
+            this->token = res["token"];
+            this->username = username;
+            this->password = password;
+            is_loggedin = 1;
+        }
+        catch (const exception& e) {
+            throw runtime_error("Already logged in");
+        }
     }
 
     void User::logout() {

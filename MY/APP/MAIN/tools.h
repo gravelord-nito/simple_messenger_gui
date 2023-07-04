@@ -53,6 +53,7 @@ namespace MyUI {
     void RenderUI();
     void RenderLogin();
     void RenderSignup();
+    void RenderError(const std::string& e);
     void ShowList();
     void ShowChat(std::pair<std::string,Myapp::User::type>);
     void UpdateChats();
