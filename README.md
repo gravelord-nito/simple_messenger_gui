@@ -1,5 +1,5 @@
 # messenger_skullking_4
-A simple messanger client written using [Dear IMGUI](https://github.com/ocornut/imgui) as of the final project of advanced prgramming course at [IUT](https://english.iut.ac.ir/).
+A simple messanger client written in C/C++ as of the final project of advanced prgramming course at [IUT](https://english.iut.ac.ir/).
 
 You can find the list of all the server requests possible in [All request and reply](https://github.com/gravelord-nito/messenger_skullking_4/blob/main/Messenger%20All%20request%20and%20reply%20format.pdf) pdf file.
 
