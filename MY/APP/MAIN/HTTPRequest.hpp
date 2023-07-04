@@ -4,6 +4,8 @@
 #ifndef HTTPREQUEST_HPP
 #define HTTPREQUEST_HPP
 
+#pragma comment(lib, "ws2_32.lib")
+
 #include <cctype>
 #include <cstddef>
 #include <cstdint>
