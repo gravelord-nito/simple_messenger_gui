@@ -97,6 +97,7 @@ namespace MyUI {
                 error = e.what();
                 ImGui::OpenPopup("error popup");
             }
+            str3[0] = '\0';
         }
         if (ImGui::BeginPopup("error popup")) {
             ImGui::Text(error.c_str());
@@ -125,6 +126,9 @@ namespace MyUI {
         static char str4[32] = "";
         ImGui::InputText("enter group/channel id", str4, IM_ARRAYSIZE(str4));
         try {
+            if (ImGui::Button("new contact")) {
+                u.addChat(make_pair(str4, User::type::user));
+            }
             if (ImGui::Button("create group")) {
                 u.createChat(make_pair(str4, User::type::group));
             }
@@ -356,11 +360,14 @@ namespace Myapp {
         is_loggedin = 0;
         Quer mm{ {"command", "logout"}, {"username", username}, {"password", password} };
         http_get(mm);
+        chats.clear();
     }
 
     const string User::getToken() { return token; }
 
     const string User::getUser() { return username; }
+
+    void User::addChat(const pair<string, type>& p) { chats[p] = vector<json>(); }
 
     const vector<json>& User::getChat(const pair<string, type>& p) { return chats[p]; }
 

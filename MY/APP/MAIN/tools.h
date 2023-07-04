@@ -25,6 +25,7 @@ namespace Myapp {
         bool isLoggedin();
         const std::string getToken();
         const std::string getUser();
+        void addChat(const std::pair<std::string, type>& p);
         const std::vector<nlohmann::json>& getChat(const std::pair<std::string, type>&);
         const std::map<std::pair<std::string, type>, std::vector<nlohmann::json>>& getChats();
 
@@ -53,7 +54,6 @@ namespace MyUI {
     void RenderUI();
     void RenderLogin();
     void RenderSignup();
-    void RenderError(const std::string& e);
     void ShowList();
     void ShowChat(std::pair<std::string,Myapp::User::type>);
     void UpdateChats();
