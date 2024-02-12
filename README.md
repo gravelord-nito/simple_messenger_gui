@@ -12,4 +12,4 @@ Main app could be run by the solution file at [MY/APP/](https://github.com/grave
 ##  Credits
 * [Dear IMGUI](https://github.com/ocornut/imgui)
 * [Single-header C++ HTTP request class ](https://github.com/elnormous/HTTPRequest)
-* [JSON for modern C++](https://github.com/nlohmann/json#thanks)
+* [JSON for modern C++](https://github.com/nlohmann/json)
